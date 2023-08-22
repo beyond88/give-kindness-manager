@@ -1,0 +1,15 @@
+{
+    "name": "root/givekindness-manager",
+    "autoload": {
+        "psr-4": {
+            "GivekindnessManager\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mohiuddin",
+            "email": "muhin.cse.diu@gmail.com"
+        }
+    ],
+    "require": {}
+}
