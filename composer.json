@@ -1,15 +1,18 @@
 {
-    "name": "root/givekindness-manager",
-    "autoload": {
-        "psr-4": {
-            "GivekindnessManager\\": "src/"
-        }
+  "name": "root/givekindness-manager",
+  "autoload": {
+    "psr-4": {
+      "GivekindnessManager\\": "includes/"
     },
-    "authors": [
-        {
-            "name": "mohiuddin",
-            "email": "muhin.cse.diu@gmail.com"
-        }
-    ],
-    "require": {}
+    "files": [
+      "includes/functions.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "mohiuddin",
+      "email": "muhin.cse.diu@gmail.com"
+    }
+  ],
+  "require": {}
 }

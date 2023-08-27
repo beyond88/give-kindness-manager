@@ -48,7 +48,7 @@ final class Give_Kindness_Manager {
             include_once(ABSPATH . 'wp-admin/includes/plugin.php');
         }
         if ( is_plugin_active( 'give/give.php' ) ) {
-            register_activation_hook( GIVE_KINDNESS_FILE, [ $this, 'activate' ] );
+            register_activation_hook( GKM_FILE, [ $this, 'activate' ] );
             add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 
         } else {
@@ -57,8 +57,7 @@ final class Give_Kindness_Manager {
 
     }
 
-    public function givewp_plugin_required()
-    {
+    public function givewp_plugin_required() {
         ?>
         <script>
             (function($) {
@@ -69,7 +68,7 @@ final class Give_Kindness_Manager {
             })(jQuery);
         </script>
         <div id="message" class="error notice is-dismissible">
-            <p><?php echo __('GiveWP plugin is required for Give_Kindness Manager!', 'give-kindness-manager'); ?></p>
+            <p><?php echo __('GiveWP plugin is required for Give Kindness Manager!', 'give-kindness-manager'); ?></p>
             <button type="button" class="notice-dismiss">
                 <span class="screen-reader-text"><?php echo __('Dismiss this notice.', 'give-kindness-manager'); ?></span>
             </button>
@@ -104,6 +103,7 @@ final class Give_Kindness_Manager {
         define( 'GKM_TEMPLATES', GKM_PATH . '/includes/Templates/' );
         define( 'GKM_URL', plugins_url( '', GKM_FILE ) );
         define( 'GKM_ASSETS', GKM_URL . '/assets' );
+        define( 'GKM_ROLE', [ 'give_manager', 'administrator' ] );
     }
 
     /**

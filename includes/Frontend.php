@@ -1,5 +1,4 @@
 <?php
-
 namespace GivekindnessManager;
 
 /**
@@ -11,5 +10,6 @@ class Frontend {
      * Initialize the class
      */
     function __construct() {
+        new Frontend\MyDashboard();
     }
 }
