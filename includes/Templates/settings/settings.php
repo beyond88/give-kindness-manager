@@ -3,23 +3,14 @@
     #wp-give_kindness_trust_safety-wrap,
     #wp-give_kindness_guarantee-wrap,
     #wp-give_kindness_verify_details-wrap,
+    #wp-give_kindness_boosting-wrap,
     #wp-give_kindness_boosting_popup-wrap{
         width: 100%;
     }
 </style>
 <?php 
-   $defualt = give_get_default_settings();
-    // $defualt['give_kindness_verify_link_content'] = '';
-    // $defualt['give_kindness_trust_safety'] = '';
-    // $defualt['give_kindness_guarantee'] = '';
-    // $defualt['give_kindness_verify_details'] = '';
-    // $defualt['give_kindness_boosting_popup'] = '';
-    // $settings = give_get_option( 'give_settings',  $defualt);
-    $settings = get_option('give_settings');
-    // $settings = [];
-    // echo "<pre>";
-    // print_r($settings);
-    // echo "</pre>";
+    $defualt = give_get_default_settings();
+    $give_settings = get_option('give_settings');
 ?>
 
 <div id="give_kindness_manager-settings" id="give_kindness_manager-settings" data-tab-content="give_kindness_manager-settings" style="display:none;">
@@ -31,7 +22,7 @@
             </label>
             <div class="give-donor-dashboard-text-control__input">
                 <?php 
-                    $content = $settings['give_kindness_verify_link_content'];
+                    $content = $give_settings['give_kindness_verify_link_content'];
                     $settings = array( 'textarea_name' => 'give_kindness_verify_link_content', 'media_buttons' => false, 'drag_drop_upload' => false );
                     wp_editor( $content, 'give_kindness_verify_link_content', $settings );
                 ?>
@@ -46,7 +37,7 @@
             </label>
             <div class="give-donor-dashboard-text-control__input">
                 <?php 
-                    $content = $settings['give_kindness_trust_safety'];
+                    $content = $give_settings['give_kindness_trust_safety'];
                     $settings = array( 'textarea_name' => 'give_kindness_trust_safety', 'media_buttons' => false, 'drag_drop_upload' => false );
                     wp_editor( $content, 'give_kindness_trust_safety', $settings );
                 ?>
@@ -61,7 +52,7 @@
             </label>
             <div class="give-donor-dashboard-text-control__input">
                 <?php 
-                    $content = $settings['give_kindness_guarantee'];
+                    $content = $give_settings['give_kindness_guarantee'];
                     $settings = array( 'textarea_name' => 'give_kindness_guarantee', 'media_buttons' => false, 'drag_drop_upload' => false );
                     wp_editor( $content, 'give_kindness_guarantee', $settings );
                 ?>
@@ -76,7 +67,7 @@
             </label>
             <div class="give-donor-dashboard-text-control__input">
                 <?php 
-                    $content = $settings['give_kindness_verify_details'];
+                    $content = $give_settings['give_kindness_verify_details'];
                     $settings = array( 'textarea_name' => 'give_kindness_verify_details', 'media_buttons' => false, 'drag_drop_upload' => false );
                     wp_editor( $content, 'give_kindness_verify_details', $settings );
                 ?>
@@ -91,7 +82,22 @@
             </label>
             <div class="give-donor-dashboard-text-control__input">
                 <?php 
-                    $content = $settings['give_kindness_boosting_popup'];
+                    $content = $give_settings['give_kindness_boosting'];
+                    $settings = array( 'textarea_name' => 'give_kindness_boosting', 'media_buttons' => false, 'drag_drop_upload' => false );
+                    wp_editor( $content, 'give_kindness_boosting', $settings );
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="give-donor-dashboard-field-row" style="margin-bottom: 40px;">
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="gk-fundraising-target" style="font-weight: 700;">
+                <?php echo __('Boosting popup content', 'give-kindness'); ?>
+            </label>
+            <div class="give-donor-dashboard-text-control__input">
+                <?php 
+                    $content = $give_settings['give_kindness_boosting_popup'];
                     $settings = array( 'textarea_name' => 'give_kindness_boosting_popup', 'media_buttons' => false, 'drag_drop_upload' => false );
                     wp_editor( $content, 'give_kindness_boosting_popup', $settings );
                 ?>

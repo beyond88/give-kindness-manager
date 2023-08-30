@@ -19,11 +19,23 @@ class Ajax {
         check_ajax_referer( 'give_kindness-manager-nonce', 'security' );
         if( $_POST ) {
 
-            $give_kindness_verify_link_content = $_POST['give_kindness_verify_link_content'];
-            $give_kindness_trust_safety = $_POST['give_kindness_trust_safety'];
-            $give_kindness_guarantee = $_POST['give_kindness_guarantee'];
-            $give_kindness_verify_details = $_POST['give_kindness_verify_details'];
-            $give_kindness_boosting_popup = $_POST['give_kindness_boosting_popup'];
+            $give_kindness_verify_link_content = wp_unslash( $_POST['give_kindness_verify_link_content'] );
+            $give_kindness_trust_safety = wp_unslash( $_POST['give_kindness_trust_safety'] );
+            $give_kindness_guarantee = wp_unslash( $_POST['give_kindness_guarantee'] );
+            $give_kindness_verify_details = wp_unslash( $_POST['give_kindness_verify_details'] );
+            $give_kindness_boosting = wp_unslash( $_POST['give_kindness_boosting'] );
+            $give_kindness_boosting_popup = wp_unslash( $_POST['give_kindness_boosting_popup'] );
+
+            $settings = get_option('give_settings');
+
+            $settings['give_kindness_verify_link_content'] = $give_kindness_verify_link_content;
+            $settings['give_kindness_trust_safety'] = $give_kindness_trust_safety;
+            $settings['give_kindness_guarantee'] = $give_kindness_guarantee;
+            $settings['give_kindness_verify_details'] = $give_kindness_verify_details;
+            $settings['give_kindness_boosting'] = $give_kindness_boosting;
+            $settings['give_kindness_boosting_popup'] = $give_kindness_boosting_popup;
+
+            update_option('give_settings', $settings, true);
 
         }
 
