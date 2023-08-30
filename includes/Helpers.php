@@ -15,5 +15,10 @@ class Helpers {
         return $posts; 
 
     }
-    
+
+    public static function get_give_settings() {
+        //return give_get_option( 'give_settings', give_get_default_settings() );
+        // return get_option('');
+    }
+
 }

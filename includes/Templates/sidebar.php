@@ -1,9 +1,9 @@
 <div class="give-donor-dashboard-desktop-layout__tab-menu" id="give-kindness-manager-mainmenu">
     <div class="give-donor-dashboard-tab-menu">
-        <a aria-current="page" class="give-donor-dashboard-tab-link give-donor-dashboard-tab-link--is-active" href="javascript:void(0)" data-tab-id="give_kindness_manager-stats">
+        <!-- <a aria-current="page" class="give-donor-dashboard-tab-link give-donor-dashboard-tab-link--is-active" href="javascript:void(0)" data-tab-id="give_kindness_manager-stats">
             <i class="fas fa-home"></i>
             <?php echo __('Dashboard', 'give-kindness-manager'); ?>
-        </a>
+        </a> -->
         <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaigns">
             <i class="fas fa-donate"></i>
             <?php echo __('Campaigns', 'give-kindness-manager'); ?>

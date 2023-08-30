@@ -107,7 +107,7 @@ class MyDashboard {
      *
      * @return string
      */
-    public function give_kindness_campaigns() {
+    public function give_kindness_manager_campaigns() {
 
         if( ! is_user_logged_in() ){
             return NULL;
@@ -125,7 +125,8 @@ class MyDashboard {
                 'suspend',
                 'reject',
                 'approved' 
-            ]
+            ],
+            'posts_per_page'   => -1,
         ];
 
         return Helpers::get_posts( $args );

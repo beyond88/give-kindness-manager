@@ -78,33 +78,11 @@ class Assets {
             wp_enqueue_style( $handle, $style['src'], $deps, $style['version'] );
         }
 
-        wp_localize_script( 'give_kindness-admin-script', 'give-kindness-manager', [
+        wp_localize_script( 'give_kindness_manager-script', 'give_kindness_manager', [
             'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce( 'give_kindness-admin-nonce' ),
-            'confirm' => __( 'Are you sure?', 'give-kindness-manager' ),
-            'error' => __( 'Something went wrong', 'give-kindness-manager' ),
-            'apiNonce' => wp_create_nonce('wp_rest'),
-            'siteURL' => site_url('/'),
-            'giveApiURL' => site_url('/wp-json/give-api/v2/'),
-            'giveKindnessApiURL' => site_url('/wp-json/give-kindness/v1/'),
-            'userId' => get_current_user_id(),
-            'updateProfile' => __('Update Profile', 'give-kindness-manager'),
-            'updating' => __('Updating...', 'give-kindness-manager'),
-            'updated' => __('Updated', 'give-kindness-manager'),
-            'logOutMsg' => __('Are you sure you want to logout?', 'give-kindness-manager'),
-            'yes' => __('Yes', 'give-kindness-manager'),
-            'neverMind' => __('Nevermind', 'give-kindness-manager'),
-            'emailNotValid' => __('Email not valid!', 'give-kindness-manager'),
-            'passwordLength' => __('Password length minimum 6 character!', 'give-kindness-manager'),
-            'pleaseWait' => __('Please wait!', 'give-kindness-manager'),
-            'sendAgain' => __('Send again', 'give-kindness-manager'),
-            'pleaseCheckEmail' => 'Please your email inbox. An email has been sent.',
-            'saveDraft' => __('Save draft', 'give-kindness-manager'),
-            'submitForApproval' => __('Submit for approval', 'give-kindness-manager'),
-            'signUp' => __('Sign Up', 'give-kindness-manager'),
-            'saveSeeCampaign' => __('Save and see my campaign', 'give-kindness-manager'),
-            'deleteMsg' => __('Want to delete this campaign?', 'give-kindness-manager'),
-            'inValidEmail' => __('Invalid email!', 'give-kindness-manager'),
+            'nonce' => wp_create_nonce( 'give_kindness-manager-nonce' ),
+            'update' => __('Update', 'give-kindness-manager'),
+            'processing' => __('Processing', 'give-kindness-manager'),
             'save' => __('Save', 'give-kindness-manager'),
         ] );
     }
