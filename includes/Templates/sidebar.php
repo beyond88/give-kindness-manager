@@ -39,31 +39,31 @@
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <?php echo __(' Back to campaign', 'give-kindness-manager'); ?>
         </a>
-        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-statistics">
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-form-template">
             <i class="fas fa-chart-bar"></i>
             <?php echo __(' Form Template', 'give-kindness-manager'); ?>
         </a>
-        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-view-donations">
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-donation-options">
             <i class="fa fa-solid fa-list"></i>
             <?php echo __(' Donation Options', 'give-kindness-manager'); ?>
         </a>
-        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-edit-campaign">
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-form-fields">
             <i class="fas fa-edit"></i>
             <?php echo __(' Form Fields', 'give-kindness-manager'); ?>
         </a>
-        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-donation-goal">
             <i class="fa fa-history" aria-hidden="true"></i>
             <?php echo __(' Donation Goal', 'give-kindness-manager'); ?>
         </a>
-        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
+        <!-- <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-terms-condition">
             <i class="fa fa-history" aria-hidden="true"></i>
             <?php echo __(' Terms & Conditions', 'give-kindness-manager'); ?>
-        </a>
+        </a> -->
 
-        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
+        <!-- <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
             <i class="fa fa-history" aria-hidden="true"></i>
             <?php echo __(' Form Grid', 'give-kindness-manager'); ?>
-        </a>
+        </a> -->
         <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
             <i class="fa fa-history" aria-hidden="true"></i>
             <?php echo __(' Offline Donations', 'give-kindness-manager'); ?>

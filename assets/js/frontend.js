@@ -15,7 +15,7 @@
         $(".give-donor-dashboard-tab-link").each(function(index, item) {
           let currentTabContent = $(this).data('tab-id');
           if( typeof currentTabContent != "undefined" ){   
-            if( currentTabContent === targetTabContent ){
+            if( currentTabContent === targetTabContent ) {
               $('#'+currentTabContent).show();
               $(this).addClass("give-donor-dashboard-tab-link--is-active");
             } else {
