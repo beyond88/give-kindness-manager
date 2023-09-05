@@ -28,6 +28,11 @@ class Assets {
                 'version' => filemtime( GKM_PATH . '/assets/js/frontend.js' ),
                 'deps'    => [ 'jquery' ]
             ],
+            'give_kindness_manager-jold' => [
+                'src'     => GKM_ASSETS . '/js/jquery.jold.paginator.min.js',
+                'version' => filemtime( GKM_PATH . '/assets/js/jquery.jold.paginator.min.js' ),
+                // 'deps'    => [ 'jquery' ]
+            ],
             'give_kindness_manager-admin-script' => [
                 'src'     => GKM_ASSETS . '/js/admin.js',
                 'version' => filemtime( GKM_PATH . '/assets/js/admin.js' ),
@@ -68,8 +73,10 @@ class Assets {
 
         foreach ( $scripts as $handle => $script ) {
             $deps = isset( $script['deps'] ) ? $script['deps'] : false;
-
-            wp_enqueue_script( $handle, $script['src'], $deps, $script['version'], true );
+            
+            if ( is_page( 'give-kindness-manager' ) ) {
+                wp_enqueue_script( $handle, $script['src'], $deps, $script['version'], true );
+            }
         }
 
         foreach ( $styles as $handle => $style ) {

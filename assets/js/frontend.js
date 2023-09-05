@@ -1,70 +1,78 @@
 (function($, window, document ) {
     'use strict';
+
+    $( document ).ready(function() {
   
+      /************************
+       * 
+       * Sidebar handle
+       * 
+       ************************/
+      $(".give-donor-dashboard-tab-link").click(function() {
+        $(".give-donor-dashboard-tab-link").removeClass("give-donor-dashboard-tab-link--is-active");
+        $(this).addClass("give-donor-dashboard-tab-link--is-active");
+        const targetTabContent = $(this).data('tab-id');
+        $(".give-donor-dashboard-tab-link").each(function(index, item) {
+          let currentTabContent = $(this).data('tab-id');
+          if( typeof currentTabContent != "undefined" ){   
+            if( currentTabContent === targetTabContent ){
+              $('#'+currentTabContent).show();
+              $(this).addClass("give-donor-dashboard-tab-link--is-active");
+            } else {
+              if( typeof targetTabContent !== "undefined") {
+                $('#'+currentTabContent).hide();
+              }
+            }
+          }
+        });
+      });
+  
+    });    
+
     /**************************
     *
+    * Update settings menu content
     * 
     ***************************/
     $(document).on('click', "#give-kindness-manager-update-settings", function() {
 
+      let give_kindness_verify_link_content = $("#give_kindness_verify_link_content").val();
+      let give_kindness_trust_safety = $("#give_kindness_trust_safety").val();
+      let give_kindness_guarantee = $("#give_kindness_guarantee").val();
+      let give_kindness_verify_details = $("#give_kindness_verify_details").val();
+      let give_kindness_boosting_popup = $("#give_kindness_boosting_popup").val();
 
-        let give_kindness_verify_link_content = $("#give_kindness_verify_link_content").val();
-        let give_kindness_trust_safety = $("#give_kindness_trust_safety").val();
-        let give_kindness_guarantee = $("#give_kindness_guarantee").val();
-        let give_kindness_verify_details = $("#give_kindness_verify_details").val();
-        let give_kindness_boosting_popup = $("#give_kindness_boosting_popup").val();
+      let that = $(this);
+      that.text(give_kindness_manager.processing);
+      that.attr('disabled', true);
 
-        let that = $(this);
-        that.text(give_kindness_manager.processing);
-        that.attr('disabled', true);
-  
-        $.ajax({
-          type: 'POST',
-          dataType: 'json',
-          url: give_kindness_manager.ajax_url,
-          data: {
-            give_kindness_verify_link_content:give_kindness_verify_link_content,
-            give_kindness_trust_safety:give_kindness_trust_safety,
-            give_kindness_guarantee:give_kindness_guarantee,
-            give_kindness_verify_details:give_kindness_verify_details,
-            give_kindness_boosting_popup:give_kindness_boosting_popup,
-            action: 'update_settings',
-            security: give_kindness_manager.nonce,
-          },
-          success: function(data) {
-            that.attr('disabled', false);
-            that.text(give_kindness_manager.update);
-          },
-          fail: function (data) {
-            console.log('fail==>', data);
-            that.text(give_kindness_manager.update);
-            that.attr('disabled', false);
-          }
-        });
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: give_kindness_manager.ajax_url,
+        data: {
+          give_kindness_verify_link_content:give_kindness_verify_link_content,
+          give_kindness_trust_safety:give_kindness_trust_safety,
+          give_kindness_guarantee:give_kindness_guarantee,
+          give_kindness_verify_details:give_kindness_verify_details,
+          give_kindness_boosting_popup:give_kindness_boosting_popup,
+          action: 'update_settings',
+          security: give_kindness_manager.nonce,
+        },
+        success: function(data) {
+          that.attr('disabled', false);
+          that.text(give_kindness_manager.update);
+        },
+        fail: function (data) {
+          console.log('fail==>', data);
+          that.text(give_kindness_manager.update);
+          that.attr('disabled', false);
+        }
+      });
   
     });
-    
   
   })(jQuery, window, document);
-  
-  /************************
-  * 
-  * View receipt details
-  * 
-  ************************/
-  function viewReceipt(that, id) {
-    jQuery('#'+id).hide();
-    let receiptNo = jQuery(that).data('receipt-no');
-    let divId = '#receipt-no-'+receiptNo;
-    jQuery(divId).show();
-  };
-  
-  function closeReceipt(that, id) {
-    jQuery('#'+id).show();
-    let receiptNo = jQuery(that).data('receipt-no');
-    let divId = '#receipt-no-'+receiptNo;
-    jQuery(divId).hide();
-  };
   
   /************************
   * 
@@ -95,11 +103,10 @@
       }
     });
   
-    jQuery('#give-kindness-mainmenu').hide(); //hide main menu
-    jQuery('#give-kindness-campaign-edit-menu').show(); //show campaign edit menu
-    jQuery('#give_kindness-edit-campaign').show(); // show cmapaign edit template
-    // jQuery('#give_kindness-campaigns').hide();
-    // jQuery('#give_kindness-create-campaign').hide();
+    jQuery('#give-kindness-manager-menu').hide(); //hide main menu
+    jQuery('#give-kindness-manager-edit-campaign-menu').show(); //show campaign edit menu
+    jQuery('#give_kindness_manager-edit-campaign').show(); // show cmapaign edit template
+    jQuery('#give_kindness_manager-campaigns').hide();
   
   
     let data = jQuery(dat).attr('data-campaign-info');
@@ -223,7 +230,6 @@
           </div>`); // display image
         }
       }
-  
     }
   
   }

@@ -9,6 +9,8 @@
          <?php //give_kindness_manager_templates_part( 'campaigns/edit-campaign', $object ); ?>
          <?php give_kindness_manager_templates_part( 'settings/settings', $object ); ?>
          <?php //give_kindness_manager_templates_part( 'profile/profile', $object ); ?>
+
+         <?php give_kindness_manager_templates_part( 'campaigns/edit-campaign', $object ); ?>
       </div>
    </div>
 </div>

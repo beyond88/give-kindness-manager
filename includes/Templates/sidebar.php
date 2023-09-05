@@ -1,4 +1,4 @@
-<div class="give-donor-dashboard-desktop-layout__tab-menu" id="give-kindness-manager-mainmenu">
+<div class="give-donor-dashboard-desktop-layout__tab-menu" id="give-kindness-manager-menu">
     <div class="give-donor-dashboard-tab-menu">
         <!-- <a aria-current="page" class="give-donor-dashboard-tab-link give-donor-dashboard-tab-link--is-active" href="javascript:void(0)" data-tab-id="give_kindness_manager-stats">
             <i class="fas fa-home"></i>
@@ -24,5 +24,69 @@
                 <?php echo __('Logout', 'give-kindness-manager'); ?>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- 
+! 
+! Edit campaign menu
+!
+-->
+
+<div class="give-donor-dashboard-desktop-layout__tab-menu" id="give-kindness-manager-edit-campaign-menu">
+    <div class="give-donor-dashboard-tab-menu">
+        <a aria-current="page" class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaigns" onClick="showMenu('#give-kindness-manager-menu', '#give-kindness-manager-edit-campaign-menu', '', '', '#give_kindness_manager-campaigns')">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <?php echo __(' Back to campaign', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-statistics">
+            <i class="fas fa-chart-bar"></i>
+            <?php echo __(' Form Template', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-view-donations">
+            <i class="fa fa-solid fa-list"></i>
+            <?php echo __(' Donation Options', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-edit-campaign">
+            <i class="fas fa-edit"></i>
+            <?php echo __(' Form Fields', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            <?php echo __(' Donation Goal', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            <?php echo __(' Terms & Conditions', 'give-kindness-manager'); ?>
+        </a>
+
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            <?php echo __(' Form Grid', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-milestones">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            <?php echo __(' Offline Donations', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-docs">
+            <i class="far fa-file-word"></i>
+            <?php echo __(' Tribute', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-docs">
+            <i class="far fa-file-word"></i>
+            <?php echo __(' Email Reports', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-docs">
+            <i class="far fa-file-word"></i>
+            <?php echo __(' Fee Recovery', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-docs">
+            <i class="far fa-file-word"></i>
+            <?php echo __(' PDF Receipts', 'give-kindness-manager'); ?>
+        </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-docs">
+            <i class="far fa-file-word"></i>
+            <?php echo __(' Currency Switcher', 'give-kindness-manager'); ?>
+        </a>
     </div>
 </div>
