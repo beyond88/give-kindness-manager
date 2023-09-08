@@ -1,4 +1,192 @@
 #give-kindness-manager-edit-campaign-menu,
-#give_kindness_manager-edit-campaign {
+#give_kindness_manager-edit-campaign,
+#give_kindness_manager-form-template,
+#give_kindness_manager-donations {
   display: none;
+}
+
+.give_kindness_manager-inline-block {
+  display: flex;
+  flex-direction: row;
+}
+
+.give_kindness_manager-inline-block
+  .give-donor-dashboard-radio-control__option {
+  margin-right: 20px !important;
+}
+
+.give_kindness_manager-inline-block
+  .give-donor-dashboard-radio-control__option:first-of-type {
+  margin-top: 10px !important;
+}
+
+.gkm-uploader,
+.gk-uploader {
+  display: block;
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 200px;
+}
+
+.gkm-uploader label,
+.gk-uploader label {
+  float: left;
+  clear: both;
+  width: 100%;
+  padding: 1rem 0.5rem;
+  text-align: center;
+  background: #fff;
+  border-radius: 7px;
+  border: 3px solid #eee;
+  transition: all 0.2s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.gkm-uploader label:hover,
+.gk-uploader label:hover {
+  border-color: #4fa651;
+  border: 3px solid #4fa651;
+  box-shadow: inset 0 0 0 6px #eee;
+}
+
+.gkm-uploader label.hover #gkm-start i.fa,
+.gk-uploader label.hover #gk-start i.fa {
+  transform: scale(0.8);
+  opacity: 0.3;
+}
+
+.gk-uploader #gkm-start,
+.gk-uploader #gk-start {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+
+.gkm-uploader #gkm-start.hidden,
+.gk-uploader #gk-start.hidden {
+  display: none;
+}
+
+.gkm-uploader #gkm-start i.fa,
+.gk-uploader #gk-start i.fa {
+  font-size: 20px;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.gkm-uploader #gkm-response,
+.gk-uploader #gk-response {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+
+.gkm-uploader #gkm-response.gkm-hidden,
+.gk-uploader #gk-response.gk-hidden {
+  display: none;
+}
+
+.gkm-uploader #gkm-response #gkm-messages,
+.gk-uploader #gk-response #gk-messages {
+  margin-bottom: 0.5rem;
+}
+
+.gkm-uploader #gkm-file-image,
+.gk-uploader #gk-file-image {
+  display: inline;
+  margin: 0 auto 0.5rem auto;
+  width: auto;
+  height: auto;
+  max-width: 150px;
+}
+
+.gkm-uploader #gkm-file-image.gkm-hidden,
+.gk-uploader #gk-file-image.gk-hidden {
+  display: none;
+}
+
+.gkm-uploader #gkm-notimage,
+.gk-uploader #gk-notimage {
+  display: block;
+  float: left;
+  clear: both;
+  width: 100%;
+}
+
+.gkm-uploader #gkm-notimage.gkm-hidden,
+.gk-uploader #gk-notimage.gk-hidden {
+  display: none;
+}
+
+.gk-uploader .gkm-progress,
+.gk-uploader .gk-progress {
+  display: inline;
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 150px;
+  height: 8px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #eee;
+  overflow: hidden;
+}
+
+.gkm-uploader .gkm-progress[value]::-webkit-progress-bar,
+.gk-uploader .gk-progress[value]::-webkit-progress-bar {
+  border-radius: 4px;
+  background-color: #eee;
+}
+
+.gkm-uploader .gkm-progress[value]::-webkit-progress-value,
+.gk-uploader .gk-progress[value]::-webkit-progress-value {
+  background: linear-gradient(to right, #7ec980 0%, #4fa651 50%);
+  border-radius: 4px;
+}
+
+.gkm-uploader .gkm-progress[value]::-moz-progress-bar,
+.gk-uploader .gk-progress[value]::-moz-progress-bar {
+  background: linear-gradient(to right, #7ec980 0%, #4fa651 50%);
+  border-radius: 4px;
+}
+
+.gkm-uploader input[type="file"],
+.gk-uploader input[type="file"] {
+  display: none;
+}
+
+.gkm-uploader div,
+.gk-uploader div {
+  margin: 0 0 0.5rem 0;
+  color: #6b6b6b;
+  font-size: 14px;
+}
+
+.gkm-uploader .gkm-btn,
+.gk-uploader .gk-btn {
+  display: inline-block;
+  margin: 0.5rem 0.5rem 1rem 0.5rem;
+  clear: both;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: initial;
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  padding: 0 1rem;
+  height: 36px;
+  line-height: 36px;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+  background: #4fa651;
+  border-color: #4fa651;
+  cursor: pointer;
 }
