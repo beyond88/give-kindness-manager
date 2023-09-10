@@ -2,27 +2,15 @@
 
     <div class="give-donor-dashboard-heading"><?php echo __('Available Form Templates', 'give-kindness-manager'); ?></div>
     <div class="give-donor-dashboard-divider"></div>
-    <fieldset class="give-donor-dashboard-radio-control give_kindness_manager-inline-block">
-        <div class="give-donor-dashboard-radio-control__option">
-            <input type="radio" name="template-type" id="0" value="0">
-            <label for="0">
-                <?php echo __('Multi-Step Form', 'give-kindness-manager'); ?>
-            </label>
-        </div>
-        <div class="give-donor-dashboard-radio-control__option">
-            <input type="radio" name="template-type" id="1" value="1">
-            <label for="1">
-                <?php echo __('Classic Form', 'give-kindness-manager'); ?>
-            </label>
-        </div>
-        <div class="give-donor-dashboard-radio-control__option">
-            <input type="radio" name="template-type" id="2" value="2">
-            <label for="1">
-                <?php echo __('Legacy Form', 'give-kindness-manager'); ?>
-            </label>
+    <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block">
+        <div class="give-donor-dashboard-select-control__option">
+            <select name="form-type" id="form-type">
+                <option value="multi-step"><?php echo __('Multi-Step Form', 'give-kindness-manager'); ?></option>
+                <option value="classic"><?php echo __('Classic Form', 'give-kindness-manager'); ?></option>
+                <option value="legacy"><?php echo __('Legacy Form', 'give-kindness-manager'); ?></option>
+            </select>
         </div>
     </fieldset>
-
 
     <div class="give-donor-dashboard-heading"><?php echo __('Introduction', 'give-kindness-manager'); ?></div>
     <div class="give-donor-dashboard-divider"></div>
@@ -30,29 +18,23 @@
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Include one step', 'give-kindness-manager'); ?></legend>
         <div class="give-donor-dashboard-radio-control__description">If enabled, a headline and description show for the first step of the donation process.</div>
         <div class="give_kindness_manager-inline-block">
-            <div class="give-donor-dashboard-radio-control__option">
-                <input type="radio" name="sequoia[introduction][enabled]" value="enabled">
-                <label for="0">
-                    <?php echo __('Enabled', 'give-kindness-manager'); ?>
-                </label>
-            </div>
-            <div class="give-donor-dashboard-radio-control__option">
-                <input type="radio" name="sequoia[introduction][enabled]" value="disabled">
-                <label for="1">
-                    <?php echo __('Disabled', 'give-kindness-manager'); ?>
-                </label>
+            <div class="give-donor-dashboard-select-control__option">
+                <select name="sequoia[introduction][enabled]" id="introduction">
+                    <option value="enabled"><?php echo __('Enabled', 'give-kindness-manager'); ?></option>
+                    <option value="disabled"><?php echo __('Disabled', 'give-kindness-manager'); ?></option>
+                </select>
             </div>
         </div>
         <div class="give-donor-dashboard-text-control">
             <label class="give-donor-dashboard-text-control__label" for="headline">Headline</label>
             <div class="give-donor-dashboard-text-control__input">
-                <input name="sequoia[introduction][headline]" id="headline" type="text">
+                <input name="sequoia[introduction][headline]" id="introduction-headline" type="text">
             </div>
         </div>
         <div class="give-donor-dashboard-text-control">
             <label class="give-donor-dashboard-text-control__label" for="description">Description</label>
             <div class="give-donor-dashboard-text-control__input">
-                <textarea name="sequoia[introduction][description]" id="description"></textarea>
+                <textarea name="sequoia[introduction][description]" id="introduction-description"></textarea>
             </div>
         </div>
 
@@ -80,6 +62,78 @@
         </div>
     </fieldset>
 
+    <div class="give-donor-dashboard-heading"><?php echo __('Payment Amount', 'give-kindness-manager'); ?></div>
+    <div class="give-donor-dashboard-divider"></div>
+    <fieldset class="give-donor-dashboard-radio-control">
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="headline"><?php echo __('Header Label', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <input name="sequoia[payment_amount][header_label]" id="header-label" type="text">
+            </div>
+        </div>
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="description"><?php echo __('Content', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <textarea name="sequoia[payment_amount][content]" id="description"></textarea>
+            </div>
+        </div>
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="headline"><?php echo __('Continue Button', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <input name="sequoia[payment_amount][next_label]" id="header-label" type="text" placeholder="Continue Button">
+            </div>
+        </div>
+    </fieldset>   
+    
+    <div class="give-donor-dashboard-heading"><?php echo __('Payment Information', 'give-kindness-manager'); ?></div>
+    <div class="give-donor-dashboard-divider"></div>
+    <fieldset class="give-donor-dashboard-radio-control">
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="headline"><?php echo __('Header Label', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <input name="sequoia[payment_information][header_label]" id="header-label" type="text">
+            </div>
+        </div>
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="headline"><?php echo __('Headline', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <input name="sequoia[payment_information][header_label]" id="header-label" type="text" placeholder="Who's giving today?">
+            </div>
+        </div>
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="description"><?php echo __('Description', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <textarea name="sequoia[payment_information][description]" id="description"></textarea>
+            </div>
+        </div>
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="headline"><?php echo __('Submit Button', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <input name="sequoia[payment_information][checkout_label]" id="submit-button" type="text" placeholder="Submit Button">
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="give-donor-dashboard-heading"><?php echo __('Thank You', 'give-kindness-manager'); ?></div>
+    <div class="give-donor-dashboard-divider"></div>
+    <fieldset class="give-donor-dashboard-radio-control">
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="headline"><?php echo __('Headline', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <input name="sequoia[thank-you][headline]" id="header-label" type="text" placeholder="A great big thank you!">
+            </div>
+        </div>
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="description"><?php echo __('Description', 'give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <?php 
+                    $content = '';
+                    $settings = array( 'textarea_name' => 'sequoia_thank-you_description', 'media_buttons' => false, 'drag_drop_upload' => false );
+                    wp_editor( $content, 'sequoia_thank-you_description', $settings );
+                ?>
+            </div>
+        </div>
+    </fieldset>
 
 
    <button class="give-donor-dashboard-button give-donor-dashboard-button--primary" id="give_kindness_manager-update-campaign" data-campaign-id="">

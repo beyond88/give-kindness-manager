@@ -82,7 +82,9 @@ class Assets {
         foreach ( $styles as $handle => $style ) {
             $deps = isset( $style['deps'] ) ? $style['deps'] : false;
 
+            //if ( is_page( 'give-kindness-manager' ) ) {
             wp_enqueue_style( $handle, $style['src'], $deps, $style['version'] );
+            //}
         }
 
         wp_localize_script( 'give_kindness_manager-script', 'give_kindness_manager', [

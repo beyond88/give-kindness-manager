@@ -1,7 +1,7 @@
 #give-kindness-manager-edit-campaign-menu,
 #give_kindness_manager-edit-campaign,
 #give_kindness_manager-form-template,
-#give_kindness_manager-donations {
+#give_kindness_manager-donation-options {
   display: none;
 }
 
@@ -189,4 +189,35 @@
   background: #4fa651;
   border-color: #4fa651;
   cursor: pointer;
+}
+
+fieldset {
+  border-color: transparent !important;
+}
+
+select {
+  border-radius: 0 !important;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="datetime"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="range"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
+  border-radius: 0 !important;
+}
+
+#give_kindness_manager-form-template select,
+#give_kindness_manager-donation-options select {
+  width: 250px;
 }

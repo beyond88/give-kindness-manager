@@ -11,7 +11,7 @@
          <?php //give_kindness_manager_templates_part( 'profile/profile', $object ); ?>
 
          <?php give_kindness_manager_templates_part( 'campaigns/form-template', $object ); ?>
-         <?php give_kindness_manager_templates_part( 'campaigns/donations.php', $object ); ?>
+         <?php give_kindness_manager_templates_part( 'campaigns/donation-options', $object ); ?>
          <?php //give_kindness_manager_templates_part( 'campaigns/edit-campaign', $object ); ?>
 
       </div>
