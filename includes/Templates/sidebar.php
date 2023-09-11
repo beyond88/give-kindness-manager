@@ -39,6 +39,10 @@
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <?php echo __(' Back to campaign', 'give-kindness-manager'); ?>
         </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-campaign-settings">
+            <i class="fas fa-chart-bar"></i>
+            <?php echo __(' Campaign Settings', 'give-kindness-manager'); ?>
+        </a>
         <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-form-template">
             <i class="fas fa-chart-bar"></i>
             <?php echo __(' Form Template', 'give-kindness-manager'); ?>

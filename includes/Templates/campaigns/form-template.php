@@ -38,6 +38,12 @@
             </div>
         </div>
 
+        <div class="give-kindness-manager-media-items give-kindness-manager-hide" id="give-kindness-manager-media-items">
+        <!--
+            Image or file upload here
+        --->
+        </div> 
+
         <div class="give-donor-dashboard-field-row">
             <div class="give-donor-dashboard-text-control">
                 <form id="gkm-medical-document-upload-form" class="gkm-uploader">

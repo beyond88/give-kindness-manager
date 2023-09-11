@@ -85,7 +85,7 @@
       $(document).on('click', '#gkm-file-drag', function(event) { 
         
         event.preventDefault();
-        let file_type = $('#gkm-medical-document').val();
+        let file_type = 'image';
         if ( file_frame ) {
           file_frame = '';
         }
@@ -106,29 +106,14 @@
           $('#give-kindness-manager-media-items').removeClass('give-kindness-manager-hide');
           $.each(attachment, function(index, value) {
 
-            if(file_type == 'image') {
-              $(wrapper).prepend(`<div class="give-kindness-manager-media-item">
-                <img src="${value.url}" alt="">
-                <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
-                  <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
-                  </svg>
-                </a>
-                <input type="hidden" class="gkm-campaign-files" name="gkm-campaign-files[]" value="${value.id}">
-              </div>`); // display image
-            } else {
-              $(wrapper).prepend(`<div class="give-kindness-manager-media-item">
-              <object data="${value.url}" type="application/pdf" width="100px" height="100px">
-                <embed src="${value.url}" type="application/pdf">
-                  <p>This browser does not support PDFs. Please download the PDF to view it: <a href="${value.url}" download>Download PDF</a>.</p>
-                </embed>
-              </object>
-                <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
-                  <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
-                  </svg>
-                </a>
-                <input type="hidden" class="gkm-campaign-files" name="gkm-campaign-files[]" value="${value.id}">
-              </div>`); // display image
-            }
+          $(wrapper).prepend(`<div class="give-kindness-manager-media-item">
+            <img src="${value.url}" alt="">
+            <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
+              <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
+              </svg>
+            </a>
+            <input type="hidden" class="gkm-campaign-files" name="gkm-campaign-files[]" value="${value.id}">
+          </div>`); // display image
 
           });
         });
@@ -166,9 +151,9 @@
     jQuery("#give-kindness-manager-edit-campaign-menu .give-donor-dashboard-tab-link").each(function(index, item) {
       let currentTabContent = jQuery(this).data('tab-id');
 
-      if( typeof currentTabContent != "undefined" ){   
+      if( typeof currentTabContent != "undefined" ) {   
         jQuery('#'+currentTabContent).hide();
-        if( currentTabContent == 'give_kindness_manager-form-template'){
+        if( currentTabContent == 'give_kindness_manager-campaign-settings') {
           jQuery(".give-donor-dashboard-tab-link").removeClass("give-donor-dashboard-tab-link--is-active");
           jQuery(this).addClass("give-donor-dashboard-tab-link--is-active");
         }
@@ -177,7 +162,7 @@
   
     jQuery('#give-kindness-manager-menu').hide(); //hide main menu
     jQuery('#give-kindness-manager-edit-campaign-menu').show(); //show campaign edit menu
-    jQuery('#give_kindness_manager-form-template').show(); // show cmapaign edit template
+    jQuery('#give_kindness_manager-campaign-settings').show(); // show campaign-settings template
     jQuery('#give_kindness_manager-campaigns').hide();
   
   

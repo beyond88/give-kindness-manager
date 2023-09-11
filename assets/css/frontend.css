@@ -1,7 +1,8 @@
 #give-kindness-manager-edit-campaign-menu,
 #give_kindness_manager-edit-campaign,
 #give_kindness_manager-form-template,
-#give_kindness_manager-donation-options {
+#give_kindness_manager-donation-options,
+#give_kindness_manager-campaign-settings {
   display: none;
 }
 
@@ -220,4 +221,8 @@ input[type="week"] {
 #give_kindness_manager-form-template select,
 #give_kindness_manager-donation-options select {
   width: 250px;
+}
+
+.give-kindness-manager-hide {
+  display: none;
 }
