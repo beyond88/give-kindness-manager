@@ -226,3 +226,27 @@ input[type="week"] {
 .give-kindness-manager-hide {
   display: none;
 }
+
+.give-kindness-manager-media-items {
+  margin: 20px 0;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  width: calc(100% - 15px);
+}
+
+.give-kindness-manager-media-item {
+  margin: 10px 10px 0;
+  position: relative;
+}
+
+.give-kindness-manager-media-item img {
+  width: 150px;
+  height: 150px;
+}
+
+.give-kindness-manager-media-item-remove {
+  position: absolute;
+  right: 4px;
+  top: 0px;
+}

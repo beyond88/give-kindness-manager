@@ -48,7 +48,7 @@
     <div class="give-donor-dashboard-field-row">
         <div class="give-donor-dashboard-text-control">
             <form id="gkm-medical-document-upload-form" class="gkm-uploader">
-                <label for="gkm-medical-document-upload" id="gkm-file-drag">
+                <label for="gkm-medical-document-upload" id="gkm-feature-image-drag">
                     <div id="gkm-start">
                         <i class="fa fa-download" aria-hidden="true"></i>
                         <div>
