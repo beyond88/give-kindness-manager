@@ -152,7 +152,7 @@
               <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
               </svg>
             </a>
-            <input type="hidden" class="gkm-campaign-files" name="gkm-campaign-files[]" value="${value.id}">
+            <input type="hidden" class="gkm-feature-image-id" name="gkm-feature-image-id" value="${value.id}">
           </div>`); // display image
 
           });
@@ -205,32 +205,37 @@
     jQuery('#give_kindness_manager-campaign-settings').show(); // show campaign-settings template
     jQuery('#give_kindness_manager-campaigns').hide();
   
+    let data = jQuery(dat).attr('data-campaign-info');
+        data = JSON.parse(data);
+      // console.log('test data==>',data);
   
-    // let data = jQuery(dat).attr('data-campaign-info');
-    //     data = JSON.parse(data);
-  
-    // let campaign_name = data['campaign_name'];
-    // let beneficiary_name = data['beneficiary_name'];
-    // let mobile_code = data['mobile_code'];
-    // let mobile_number = data['mobile_number'];
-    // let beneficiary_relationship = data['beneficiary_relationship'];
-    // let beneficiary_country = data['beneficiary_country'];
-    // let beneficiary_age = data['beneficiary_age'];
-    // let medical_condition = data['medical_condition'];
-    // let medical_document_type = data['medical_document_type'];
-    // let medical_document = data['medical_document'];
-    // let medical_document_url = data['medical_document_url'];
-    // let campaign_detail = data['campaign_detail'];
-  
-    // let campaign_email = data['campaign_email'];
-    // let campaign_country = data['campaign_country'];
-    // let government_assistance = data['government_assistance'];
-    // let government_assistance_details = data['government_assistance_details'];
-    // let fundraising_target = data['fundraising_target'];
-    // let campaign_boosting = data['campaign_boosting'];
-    // let campaign_id = data['campaign_id'];
-    // let status = data['status'];
-    // let campaign_currency = data['campaign_currency'];
+    let campaign_id = data['campaign_id'];
+    let post_status = data['post_status'];
+    let feature_image_id = data['feature_image_id'];
+    let feature_image_url = data['feature_image_url'];
+    let cats = data['cats'];
+
+   
+    jQuery("#form-status").val(post_status);
+    if( cats.length > 0 ) {
+      jQuery('.gkm-form-type').each(function(i, obj) {
+        cat_id = parseInt(jQuery(this).val());
+        if( cats.includes(cat_id) ){
+          jQuery(this).attr('checked','checked');
+        }
+      });
+    }
+
+    if( feature_image_id != '' ) {
+      jQuery('#give-kindness-manager-feature-image').prepend(`<div class="give-kindness-manager-media-item">
+        <img src="${feature_image_url}" alt="">
+        <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
+          <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
+          </svg>
+        </a>
+        <input type="hidden" class="gkm-feature-image-id" name="gkm-feature-image-id" value="${feature_image_id}">
+      </div>`); // display image
+    }
   
     // jQuery('#gke-campaign-name').val(campaign_name);
     // jQuery('#gke-fundraising-target').val(fundraising_target);

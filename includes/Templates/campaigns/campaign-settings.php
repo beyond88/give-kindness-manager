@@ -29,12 +29,11 @@
                 );
 
                 $give_forms_category = get_categories($args);
-            ?>
-            <select name="form-type" id="form-type">
-                <?php foreach( $give_forms_category as $cat ): ?>
-                <option value="<?php echo $cat->id; ?>"><?php echo $cat->name; ?></option>
-                <?php endforeach; ?>
-            </select>
+                // print_r($give_forms_category);
+            foreach( $give_forms_category as $cat ): ?>
+            <input type="checkbox" class="gkm-form-type" name="form-type" value="<?php echo $cat->term_id; ?>"> <?php echo $cat->name; ?>
+            <br>
+            <?php endforeach; ?>
         </div>
     </fieldset>
 

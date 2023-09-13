@@ -72,51 +72,30 @@
                     <div class="give-donor-dashboard-table__donation-receipt">
                         <?php 
                             $data = [];
-
                             $campaign_id = $campaign->ID;
                             $data['campaign_id'] = $campaign_id;
-                            $data['campaign_name'] = $campaign->post_title;
-                            $data['fundraising_target'] = str_replace(",", "", number_format( give_get_meta( $campaign_id, '_give_set_goal', true ), 2 ) );
-                            $data['fundraising_target'] = give_get_meta( $campaign_id, '_give_set_goal', true );
-                            $data['beneficiary_name'] = get_post_meta( $campaign_id, 'benefiary_name', true );
-                            $data['mobile_code'] = get_post_meta( $campaign_id, 'mobile_code', true );
-                            $data['mobile_number'] = get_post_meta( $campaign_id, 'mobile_number', true );
-                            $data['beneficiary_relationship'] = get_post_meta( $campaign_id, 'beneficiary_relationship', true );
-                            $data['beneficiary_country'] = get_post_meta( $campaign_id, 'beneficiary_country', true );
-                            $data['beneficiary_age'] = get_post_meta( $campaign_id, 'beneficier_age', true );
-                            $data['medical_condition'] = get_post_meta( $campaign_id, 'medical_condition', true );
-                            $data['medical_document_type'] = get_post_meta( $campaign_id, 'medical_document_type', true );
-                            $data['campaign_detail'] = get_post_meta( $campaign_id, 'campaign_detail', true );
-                            $data['campaign_email'] = get_post_meta( $campaign_id, 'campaign_email', true );
-                            $data['campaign_country'] = get_post_meta( $campaign_id, 'campaign_country', true );
-                            $data['government_assistance'] = get_post_meta( $campaign_id, 'government_assistance', true );
-                            $data['government_assistance_details'] = get_post_meta( $campaign_id, 'government_assistance_details', true );
-                            $data['campaign_boosting'] = get_post_meta( $campaign_id, 'campaign_boosting', true );
-                            $data['campaign_currency'] = give_currency_symbol(give_get_currency(), true);
+                            $data['post_status'] = $campaign->post_status;
                             
-                            $medical_document_url = [];
-
-                            $medical_document = get_post_meta( $campaign_id, 'medical_document', true );
-                            $attach_ids = explode(',', $medical_document);
-                            if( count($attach_ids) ) {
-                                foreach( $attach_ids as $attach_id ) {
-
-                                    if( $data['medical_document_type'] == "pdf"){
-                                        $attach_url = wp_get_attachment_url( $attach_id );
-                                        array_push( $medical_document_url, $attach_url);
-                                    } else {
-                                        $image = wp_get_attachment_image_src($attach_id, 'full');
-                                        if( !empty( $image ) ) {
-                                            $attach_url = $image[0];
-                                            array_push( $medical_document_url, $attach_url);
-                                        }
-                                    }
+                            $categories = get_the_terms( $campaign->ID, 'give_forms_category' );
+                            $cats = [];
+                            if( ! empty( $categories ) ) {
+                                foreach( $categories as $cat ) {
+                                    array_push($cats, $cat->term_id);
                                 }
                             }
 
-                            $data['medical_document'] = $attach_ids;
-                            $data['medical_document_url'] = $medical_document_url;
-                            $data['status'] = $campaign->post_status;
+                            if ( has_post_thumbnail( $campaign->ID ) ) {
+                                $image = wp_get_attachment_image_src( get_post_thumbnail_id( $campaign->ID ) );
+                                $attach_id = get_post_thumbnail_id( $campaign->ID );
+                                $attach_url = $image[0];
+                                $data['feature_image_id'] = $attach_id;
+                                $data['feature_image_url'] = $attach_url;
+                            } else {
+                                $data['feature_image_id'] = '';
+                                $data['feature_image_url'] = '';
+                            }
+
+                            $data['cats'] = $cats;
                             $jsonData = json_encode($data);
 
                         ?>
