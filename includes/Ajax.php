@@ -12,6 +12,9 @@ class Ajax {
     public function __construct() {
         add_action( 'wp_ajax_update_settings', array( $this, 'update_settings') );
         add_action( 'wp_ajax_nopriv_update_settings', array( $this, 'update_settings') );
+
+        add_action( 'wp_ajax_get_form_info', array( $this, 'get_form_info') );
+        add_action( 'wp_ajax_nopriv_get_form_info', array( $this, 'get_form_info') );
     }
 
     public function update_settings() {
@@ -42,5 +45,50 @@ class Ajax {
         // wp_die();
         wp_send_json(['success'=>'Success']);
 
+    }
+
+    public function get_form_info() {
+        check_ajax_referer( 'give_kindness-manager-nonce', 'security' );
+        if( $_POST ) {
+            $form_id = wp_unslash( $_POST['form_id'] );
+            $tab = wp_unslash( $_POST['tab'] );
+            $form_data = [];
+            
+            if( $tab == 'give_kindness_manager-form-template' ) {
+
+                $form_template = get_post_meta($form_id, '_give_form_template', true );
+
+                $form_info = '';
+                if( $form_template == 'sequoia' ) {
+                    $form_info = get_post_meta($form_id, '_give_sequoia_form_template_settings', true);
+                } else if( $form_template == 'classic' ) {
+                    $form_info = get_post_meta($form_id, '_give_classic_form_template_settings', true);
+                } else {
+                    $form_info = get_post_meta($form_id, '_give_legacy_form_template_settings', true);
+                }
+
+                $form_data['template_info'] = $form_info; 
+
+            } else if( $tab == 'give_kindness_manager-donation-options' ) {
+                $donation_option = get_post_meta( $form_id, '_give_price_option', true);
+                $recurring_donations = get_post_meta( $form_id, '_give_recurring', true);
+                $set_donation = get_post_meta( $form_id, '_give_set_price', true); 
+                $custom_amount = get_post_meta( $form_id, '_give_custom_amount', true);
+                $custom_amount_range_minimum = get_post_meta( $form_id, '_give_custom_amount_range_minimum', true);
+                $custom_amount_range_maximum = get_post_meta( $form_id, '_give_custom_amount_range_maximum', true);
+                $custom_amount_text = get_post_meta( $form_id, '_give_custom_amount_text', true);
+                $currency_price = get_post_meta( $form_id, '_give_currency_price', true);
+                
+                $form_data['donation_option'] = $donation_option;
+                $form_data['recurring_donations'] = $recurring_donations;
+                $form_data['set_donation'] = $set_donation;
+                $form_data['custom_amount'] = $custom_amount;
+                $form_data['custom_amount_range_minimum'] = $custom_amount_range_minimum;
+                $form_data['custom_amount_range_maximum'] = $custom_amount_range_maximum;
+                $form_data['custom_amount_text'] = $custom_amount_text;
+                $form_data['currency_price'] = $currency_price;
+            }
+        }
+        wp_send_json_success( $form_data );
     }
 }
