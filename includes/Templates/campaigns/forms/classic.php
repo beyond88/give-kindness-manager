@@ -1,5 +1,7 @@
 <div class="give-donor-classic-form">
 
+    <div class="give-kindness-manager-ring"><div></div><div></div><div></div><div></div></div>
+
     <div class="give-donor-dashboard-heading"><?php echo __('Visual Appearance', 'give-kindness-manager'); ?></div>
     <div class="give-donor-dashboard-divider"></div>
 

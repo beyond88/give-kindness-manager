@@ -1,5 +1,7 @@
 <div class="give-donor-legacy-form">
 
+    <div class="give-kindness-manager-ring"><div></div><div></div><div></div><div></div></div>
+
     <fieldset class="give-donor-dashboard-radio-control">
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Display Style', 'give-kindness-manager'); ?></legend>
         <div class="give_kindness_manager-inline-block">

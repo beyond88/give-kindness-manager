@@ -250,3 +250,47 @@ input[type="week"] {
   right: 4px;
   top: 0px;
 }
+
+.give-kindness-manager-ring {
+  display: inline-block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 50%;
+}
+.give-kindness-manager-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 8px;
+  border: 4px solid #7ec980;
+  border-radius: 50%;
+  animation: give-kindness-manager-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1)
+    infinite;
+  border-color: #7ec980 transparent transparent transparent;
+}
+.give-kindness-manager-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.give-kindness-manager-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.give-kindness-manager-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes give-kindness-manager-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.give-donor-classic-form,
+.give-donor-legacy-form,
+.give-donor-multi-step-form {
+  position: relative;
+}

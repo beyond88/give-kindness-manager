@@ -1,4 +1,6 @@
 <div class="give-donor-dashboard-tab-content" id="give_kindness_manager-donation-options" data-tab-content="give_kindness_manager-donation-options">
+
+   <div class="give-kindness-manager-ring"><div></div><div></div><div></div><div></div></div>
    
    <div class="give-donor-dashboard-heading"><?php echo __('Donation Option', 'give-kindness-manager'); ?></div>
    <div class="give-donor-dashboard-divider"></div>

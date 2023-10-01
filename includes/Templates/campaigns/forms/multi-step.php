@@ -1,5 +1,7 @@
 <div class="give-donor-multi-step-form">
 
+    <div class="give-kindness-manager-ring"><div></div><div></div><div></div><div></div></div>
+
     <div class="give-donor-dashboard-heading"><?php echo __('Visual Appearance', 'give-kindness-manager'); ?></div>
     <div class="give-donor-dashboard-divider"></div>
     <fieldset class="give-donor-dashboard-radio-control">
@@ -228,5 +230,6 @@
             </div>
         </div>
     </fieldset>
+
 
 </div>
