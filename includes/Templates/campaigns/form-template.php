@@ -12,9 +12,9 @@
         </div>
     </fieldset>
 
-    <?php give_kindness_manager_templates_part( 'campaigns/forms/multi-step', NULL ); ?>
+    <?php //give_kindness_manager_templates_part( 'campaigns/forms/multi-step', NULL ); ?>
     <?php give_kindness_manager_templates_part( 'campaigns/forms/classic', NULL ); ?>
-    <?php give_kindness_manager_templates_part( 'campaigns/forms/legacy', NULL ); ?>
+    <?php //give_kindness_manager_templates_part( 'campaigns/forms/legacy', NULL ); ?>
 
    <button class="give-donor-dashboard-button give-donor-dashboard-button--primary give_kindness_manager-update-campaign" id="give_kindness_manager-update-campaign" data-campaign-id="">
       <?php echo __('Update', 'give-kindness'); ?>
