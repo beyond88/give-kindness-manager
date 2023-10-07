@@ -62,6 +62,7 @@ class Ajax {
             $form_id = wp_unslash( $_POST['form_id'] );
             $tab = wp_unslash( $_POST['tab'] );
             $form_data = [];
+            $form_data['tab'] = $tab;
             
             if( $tab == 'give_kindness_manager-form-template' ) {
                 

@@ -76,6 +76,14 @@
                 }
               }
 
+              if(res.hasOwnProperty('data') && res.data.hasOwnProperty('tab')){
+                let currentTab = res.data.tab;
+                if(currentTab === "give_kindness_manager-donation-options"){
+                  let hideLoader = true;
+                  showHideLoader('#give_kindness_manager-donation-options', hideLoader);
+                }
+              }
+
 
 
             }
