@@ -290,6 +290,11 @@ input[type="week"] {
 }
 
 .give-donor-classic-form,
+.give-donor-legacy-form {
+  display: none;
+}
+
+.give-donor-classic-form,
 .give-donor-legacy-form,
 .give-donor-multi-step-form {
   position: relative;

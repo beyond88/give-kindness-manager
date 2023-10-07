@@ -17,6 +17,10 @@ class Ajax {
         add_action( 'wp_ajax_nopriv_get_form_info', array( $this, 'get_form_info') );
     }
 
+    /**
+     * Update settings
+     * 
+     */
     public function update_settings() {
 
         check_ajax_referer( 'give_kindness-manager-nonce', 'security' );
@@ -47,7 +51,12 @@ class Ajax {
 
     }
 
+    /**
+     * Get template info
+     * 
+     */
     public function get_form_info() {
+
         check_ajax_referer( 'give_kindness-manager-nonce', 'security' );
         if( $_POST ) {
             $form_id = wp_unslash( $_POST['form_id'] );
@@ -55,7 +64,7 @@ class Ajax {
             $form_data = [];
             
             if( $tab == 'give_kindness_manager-form-template' ) {
-
+                
                 $form_template = get_post_meta($form_id, '_give_form_template', true );
 
                 $form_info = '';
@@ -67,9 +76,11 @@ class Ajax {
                     $form_info = get_post_meta($form_id, '_give_legacy_form_template_settings', true);
                 }
 
-                $form_data['template_info'] = $form_info; 
+                $form_data['form_type'] = $form_template;               
+                $form_data['form_info'] = $form_info; 
 
             } else if( $tab == 'give_kindness_manager-donation-options' ) {
+
                 $donation_option = get_post_meta( $form_id, '_give_price_option', true);
                 $recurring_donations = get_post_meta( $form_id, '_give_recurring', true);
                 $set_donation = get_post_meta( $form_id, '_give_set_price', true); 
@@ -87,6 +98,7 @@ class Ajax {
                 $form_data['custom_amount_range_maximum'] = $custom_amount_range_maximum;
                 $form_data['custom_amount_text'] = $custom_amount_text;
                 $form_data['currency_price'] = $currency_price;
+
             }
         }
         wp_send_json_success( $form_data );

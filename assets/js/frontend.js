@@ -48,9 +48,37 @@
             security: give_kindness_manager.nonce,
           },
           success: function(res) {
-            // that.attr('disabled', false);
-            // that.text(give_kindness_manager.update);
-            console.log('tab==>',res);
+            if(res.hasOwnProperty('success') && res.success == true) {
+              console.log('tab==>',res);
+
+              // Show hide form based on form type
+              if(res.hasOwnProperty('data') && res.data.hasOwnProperty('form_type')){
+                let formType = res.data.form_type;
+                $('#form-type').val(formType);
+                if(formType == 'sequoia'){ // multi-step form
+                  $('.give-donor-multi-step-form').show();
+                  $('.give-donor-classic-form').hide();
+                  $('.give-donor-legacy-form').hide();
+                  let hideLoader = true;
+                  showHideLoader('.give-donor-multi-step-form', hideLoader);
+                } else if(formType == 'classic'){ // classic form
+                  $('.give-donor-classic-form').show();
+                  $('.give-donor-multi-step-form').hide();
+                  $('.give-donor-legacy-form').hide();
+                  let hideLoader = true;
+                  showHideLoader('.give-donor-classic-form', hideLoader);
+                } else { // legacy form
+                  $('.give-donor-legacy-form').show();
+                  $('.give-donor-classic-form').hide();
+                  $('.give-donor-multi-step-form').hide();
+                  let hideLoader = true;
+                  showHideLoader('.give-donor-legacy-form', hideLoader);
+                }
+              }
+
+
+
+            }
           },
           fail: function (res) {
             console.log('fail==>', res);
@@ -199,6 +227,30 @@
       });
 
     });
+
+    // Change form base on form type
+    $(document).on('change', '#form-type', function(){
+      let formType = $(this).val();
+      if(formType == 'sequoia'){ // multi-step form
+        $('.give-donor-multi-step-form').show();
+        $('.give-donor-classic-form').hide();
+        $('.give-donor-legacy-form').hide();
+        let hideLoader = true;
+        showHideLoader('.give-donor-multi-step-form', hideLoader);
+      } else if(formType == 'classic'){ // classic form
+        $('.give-donor-classic-form').show();
+        $('.give-donor-multi-step-form').hide();
+        $('.give-donor-legacy-form').hide();
+        let hideLoader = true;
+        showHideLoader('.give-donor-classic-form', hideLoader);
+      } else { // legacy form
+        $('.give-donor-legacy-form').show();
+        $('.give-donor-classic-form').hide();
+        $('.give-donor-multi-step-form').hide();
+        let hideLoader = true;
+        showHideLoader('.give-donor-legacy-form', hideLoader);
+      }
+    });
   
   })(jQuery, window, document);
   
@@ -291,4 +343,17 @@
       jQuery(show_content).show();
     }
   
+  }
+
+  /**************************
+  *  
+  * Show/hide spinner
+  * 
+  ***************************/
+  function showHideLoader(area, showHideLoader = true){
+    if( showHideLoader === true ){
+      jQuery(area).find('.give-kindness-manager-ring').hide();
+    } else {
+      jQuery(area).find('.give-kindness-manager-ring').show();
+    }
   }
