@@ -8,7 +8,7 @@
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Primary Font', 'give-kindness-manager'); ?></legend>
         <div class="give_kindness_manager-inline-block">
             <div class="give-donor-dashboard-select-control__option">
-                <select name="sequoia[visual_appearance][google-fonts]" id="google-fonts">
+                <select name="sequoia[visual_appearance][google-fonts]" id="gkm-google_fonts">
                     <option value="enabled"><?php echo __('Montserrat Google Font', 'give-kindness-manager'); ?></option>
                     <option value="disabled"><?php echo __('User’s System Font', 'give-kindness-manager'); ?></option>
                 </select>
@@ -20,9 +20,9 @@
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Decimal amounts', 'give-kindness-manager'); ?></legend>
         <div class="give_kindness_manager-inline-block">
             <div class="give-donor-dashboard-select-control__option">
-                <select name="sequoia[visual_appearance][google-fonts]" id="google-fonts">
-                    <option value="enabled"><?php echo __('Disabled', 'give-kindness-manager'); ?></option>
-                    <option value="disabled"><?php echo __('Enabled', 'give-kindness-manager'); ?></option>
+                <select name="sequoia[visual_appearance][decimals_enabled]" id="gkm-decimals_enabled">
+                    <option value="enabled"><?php echo __('Enabled', 'give-kindness-manager'); ?></option>
+                    <option value="disabled"><?php echo __('Disabled', 'give-kindness-manager'); ?></option>
                 </select>
             </div>
         </div>
@@ -35,9 +35,9 @@
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Include Step One', 'give-kindness-manager'); ?></legend>
         <div class="give_kindness_manager-inline-block">
             <div class="give-donor-dashboard-select-control__option">
-                <select name="sequoia[introduction][enabled]" id="enabled">
-                    <option value="enabled"><?php echo __('Disabled', 'give-kindness-manager'); ?></option>
-                    <option value="disabled"><?php echo __('Enabled', 'give-kindness-manager'); ?></option>
+                <select name="sequoia[introduction][enabled]" id="gkm-introduction_enabled">
+                    <option value="enabled"><?php echo __('Enabled', 'give-kindness-manager'); ?></option>
+                    <option value="disabled"><?php echo __('Disabled', 'give-kindness-manager'); ?></option>
                 </select>
             </div>
         </div>
@@ -47,7 +47,7 @@
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Headline', 'give-kindness-manager'); ?></legend>
         <div class="give-donor-dashboard-text-control">
             <div class="give-donor-dashboard-text-control__input">
-                <input name="sequoia[introduction][headline]" id="introduction-headline" type="text" placeholder="<?php echo __('Flood program', 'give-kindness-manager'); ?>">
+                <input name="sequoia[introduction][headline]" id="gkm-introduction_headline" type="text" placeholder="<?php echo __('Flood program', 'give-kindness-manager'); ?>">
             </div>
         </div>
     </fieldset>
@@ -56,7 +56,7 @@
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Description', 'give-kindness-manager'); ?></legend>
         <div class="give-donor-dashboard-text-control">
             <div class="give-donor-dashboard-text-control__input">
-                <textarea name="sequoia[introduction][description]" id="introduction-description" value="" placeholder="<?php echo __('Flood recovery program.', 'give-kindness-manager'); ?>"></textarea>
+                <textarea name="sequoia[introduction][description]" id="gkm-introduction_description" value="" placeholder="<?php echo __('Flood recovery program.', 'give-kindness-manager'); ?>"></textarea>
             </div>
         </div>
     </fieldset>
@@ -73,7 +73,7 @@
         <div class="give-donor-dashboard-field-row">
             <div class="give-donor-dashboard-text-control">
                 <form id="gkm-medical-document-upload-form" class="gkm-uploader">
-                    <label for="gkm-medical-document-upload" id="gkm-file-drag">
+                    <label for="gkm-medical-document-upload" id="gkm-file_drag">
                         <div id="gkm-start">
                             <i class="fa fa-download" aria-hidden="true"></i>
                             <div>
@@ -91,7 +91,7 @@
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Donate Button', 'give-kindness-manager'); ?></legend>
         <div class="give-donor-dashboard-text-control">
             <div class="give-donor-dashboard-text-control__input">
-                <input name="sequoia[introduction][donate_label]" id="donate_label" type="text">
+                <input name="sequoia[introduction][donate_label]" id="gkm-donate_label" type="text">
             </div>
         </div>
     </fieldset>

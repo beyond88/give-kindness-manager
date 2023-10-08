@@ -154,7 +154,7 @@
     let file_frame;
     let attachment;
     let wrapper = $('#give-kindness-manager-media-items'); //Input image wrapper
-    $(document).on('click', '#gkm-file-drag', function(event) { 
+    $(document).on('click', '#gkm-file_drag', function(event) { 
       
       event.preventDefault();
       let file_type = 'image';
@@ -173,11 +173,12 @@
         multiple: true // set this to true for multiple file selection
       });
 
+      removeDiv('#give-kindness-manager-media-items', '.give-kindness-manager-media-item');
+      
       file_frame.on( 'select', function() {
         attachment = file_frame.state().get('selection').toJSON();
         wrapper.removeClass('give-kindness-manager-hide');
         $.each(attachment, function(index, value) {
-
         $(wrapper).prepend(`<div class="give-kindness-manager-media-item">
           <img src="${value.url}" alt="">
           <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
@@ -186,7 +187,6 @@
           </a>
           <input type="hidden" class="gkm-campaign-files" name="gkm-campaign-files[]" value="${value.id}">
         </div>`); // display image
-
         });
       });
 
@@ -382,6 +382,16 @@ function formLoad(form, formType){
     let paymentInformation = form.payment_information;
     let thankYou = form['thank-you'];
     let visualAppearance = form.visual_appearance;
+
+    jQuery("#gkm-google_fonts").val(visualAppearance['google-fonts']);
+    jQuery("#gkm-decimals_enabled").val(visualAppearance['decimals_enabled']);
+
+    jQuery("#gkm-introduction_enabled").val(introduction['enabled']);
+    jQuery("#gkm-introduction_headline").val(introduction['headline']);
+    jQuery("#gkm-introduction_description").val(introduction['description']);
+    jQuery("#gkm-donate_label").val(introduction['donate_label']);
+    
+    
   } else if(formType === 'classic'){
     let donationAmount = form.donation_amount;
     let donationReceipt = form.donation_receipt;
@@ -392,4 +402,8 @@ function formLoad(form, formType){
     let displaySettings = form.display_settings;
     let paymentInformation= form.payment_information;
   }
+}
+
+function removeDiv(parentDiv, targetDiv){
+  jQuery(parentDiv).find(targetDiv).remove();
 }
