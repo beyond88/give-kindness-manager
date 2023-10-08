@@ -29,6 +29,7 @@
     </fieldset>
 
     <div class="give-donor-dashboard-heading"><?php echo __('Introduction', 'give-kindness-manager'); ?></div>
+    <div class="give-donor-dashboard-divider"></div>
 
     <fieldset class="give-donor-dashboard-radio-control">
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Include Step One', 'give-kindness-manager'); ?></legend>
