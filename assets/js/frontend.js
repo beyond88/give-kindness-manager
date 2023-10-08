@@ -174,7 +174,7 @@
       });
 
       removeDiv('#give-kindness-manager-media-items', '.give-kindness-manager-media-item');
-      
+
       file_frame.on( 'select', function() {
         attachment = file_frame.state().get('selection').toJSON();
         wrapper.removeClass('give-kindness-manager-hide');
@@ -261,6 +261,46 @@
       $('.give-donor-multi-step-form').hide();
       let hideLoader = true;
       showHideLoader('.give-donor-legacy-form', hideLoader);
+    }
+  });
+
+  // Show/hide Include Step One form
+  $(document).on('change', '#gkm-introduction_enabled', function(){
+    let introductionEnabled = $(this).val();
+    if( introductionEnabled === 'enabled'){
+      showHideContent('', '.gkm-introduction-item');
+    } else {
+      showHideContent('.gkm-introduction-item', '');
+    }
+  });
+
+  // Show/hide donation summary form
+  $(document).on('change', '#gkm-donation_summary_enabled', function(){
+    let donationSummary = $(this).val();
+    if( donationSummary === 'enabled'){
+      showHideContent('', '.gkm-donation-summary-item');
+    } else {
+      showHideContent('.gkm-donation-summary-item', '');
+    }
+  });
+
+  // Show/hide thank you form
+  $(document).on('change', '#gkm-ty_sharing', function(){
+    let thankYou = $(this).val();
+    if(thankYou === 'enabled'){
+      showHideContent('', '.gkm-thank-you-item');
+    } else {
+      showHideContent('.gkm-thank-you-item', '');
+    }
+  });
+
+  // Show/hide classic thank you form
+  $(document).on('change', '#gkm-classic-ty-social_sharing', function(){
+    let thankYou = $(this).val();
+    if(thankYou === 'enabled'){
+      showHideContent('', '.gkm-class-ty-sharing-item');
+    } else {
+      showHideContent('.gkm-class-ty-sharing-item', '');
     }
   });
   
@@ -377,27 +417,106 @@ function showHideLoader(area, showHideLoader = true){
 ***************************/
 function formLoad(form, formType){
   if(formType === 'sequoia'){
-    let introduction = form.introduction;
-    let paymentAmount= form.payment_amount;
-    let paymentInformation = form.payment_information;
-    let thankYou = form['thank-you'];
-    let visualAppearance = form.visual_appearance;
 
+    /**********************
+     * Visual Appearance
+     **********************/
+    let visualAppearance = form.visual_appearance;
     jQuery("#gkm-google_fonts").val(visualAppearance['google-fonts']);
     jQuery("#gkm-decimals_enabled").val(visualAppearance['decimals_enabled']);
 
+    /**********************
+     * Introduction
+     **********************/
+    let introduction = form.introduction;
     jQuery("#gkm-introduction_enabled").val(introduction['enabled']);
+    if(introduction['enabled'] === 'enabled'){
+      showHideContent('', '.gkm-introduction-item');
+    }
+
+    if(introduction['image'] !=''){
+      jQuery("#give-kindness-manager-media-items").prepend(`<div class="give-kindness-manager-media-item">
+        <img src="${introduction['image']}" alt="">
+        <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
+          <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
+          </svg>
+        </a>
+      </div>`); // display image
+    }
     jQuery("#gkm-introduction_headline").val(introduction['headline']);
     jQuery("#gkm-introduction_description").val(introduction['description']);
     jQuery("#gkm-donate_label").val(introduction['donate_label']);
-    
-    
-  } else if(formType === 'classic'){
-    let donationAmount = form.donation_amount;
-    let donationReceipt = form.donation_receipt;
-    let donorInformation = form.donor_information;
+
+    /**********************
+     * Payment Amount
+     **********************/
+    let paymentAmount= form.payment_amount;
+    jQuery("#gkm-payment_header_label").val(paymentAmount['header_label']);
+    jQuery("#gkm-payment_content").val(paymentAmount['content']);
+    jQuery("#gkm-next_label").val(paymentAmount['next_label']);
+
+    /**********************
+     * Payment Information
+    **********************/
     let paymentInformation = form.payment_information;
+    jQuery("#gkm-payment_info_header_label").val(paymentInformation['header_label']);
+    jQuery("#gkm-payment_info_headline").val(paymentInformation['headline']);
+    jQuery("#gkm-payment_info_description").val(paymentInformation['description']);
+    jQuery("#gkm-donation_summary_enabled").val(paymentInformation['donation_summary_enabled']);
+    if(paymentInformation['donation_summary_enabled'] === 'enabled'){
+      showHideContent('', '.gkm-donation-summary-item');
+    }
+    jQuery("#gkm-donation_summary_heading").val(paymentInformation['donation_summary_heading']);
+    jQuery("#gkm-donation_summary_location").val(paymentInformation['donation_summary_location']);
+    jQuery("#gkm-checkout_label").val(paymentInformation['checkout_label']);
+
+    /**********************
+     * Thank You
+    **********************/
+    let thankYou = form['thank-you'];
+    jQuery("#gkm-ty_headline").val(thankYou['headline']);
+    jQuery("#gkm-ty_description").val(thankYou['description']);
+    jQuery("#gkm-ty_sharing").val(thankYou['sharing']);
+    if(thankYou['sharing'] == "enabled"){
+      showHideContent('', '.gkm-thank-you-item');
+    }
+    jQuery("#gkm-ty_sharing_instructions").val(thankYou['sharing_instruction']);
+    jQuery("#gkm-ty_twitter_message").val(thankYou['twitter_message']);
+
+  } else if(formType === 'classic'){
+
     let visualAppearance = form.visual_appearance;
+    jQuery("#gkm-classic-container_style").val(visualAppearance.container_style);
+    jQuery("#gkm-classic-primary_font").val(visualAppearance.primary_font);
+    jQuery("#gkm-classic-display_header").val(visualAppearance.display_header);
+    jQuery("#gkm-classic-secure_badge").val(visualAppearance.secure_badge);
+    jQuery("#gkm-classic-secure_badge_text").val(visualAppearance.secure_badge_text);
+
+    let donationAmount = form.donation_amount;
+    jQuery("#gkm-classic-da-headline").val(donationAmount.headline);
+    jQuery("#gkm-classic-da-description").val(donationAmount.description);
+
+    let donorInformation = form.donor_information;
+    jQuery("#gkm-classic-di-headline").val(donorInformation.headline);
+    jQuery("#gkm-classic-di-description").val(donorInformation.description);
+
+    let paymentInformation = form.payment_information;
+    jQuery("#gkm-classic-pm-headline").val(paymentInformation.headline);
+    jQuery("#gkm-classic-pm-description").val(paymentInformation.description);
+    jQuery("#gkm-classic-donation_summary_enabled").val(paymentInformation.donation_summary_enabled);
+    jQuery("#gkm-classic-donation_summary_heading").val(paymentInformation.donation_summary_heading);
+    jQuery("#gkm-classic-donation_summary_location").val(paymentInformation.donation_summary_location);
+
+    let donationReceipt = form.donation_receipt;
+    jQuery("#gkm-classic-ty-headline").val(donationReceipt.headline);
+    jQuery("#gkm-classic-ty-description").val(donationReceipt.description);
+    jQuery("#gkm-classic-ty-social_sharing").val(donationReceipt.social_sharing);
+    if(donationReceipt.social_sharing == 'enabled'){
+      showHideContent('', '.gkm-class-ty-sharing-item');
+    }
+    jQuery("#gkm-classic-ty-sharing_instructions").val(donationReceipt.sharing_instructions);
+    jQuery("#gkm-classic-ty-twitter_message").val(donationReceipt.twitter_message);
+
   } else {
     let displaySettings = form.display_settings;
     let paymentInformation= form.payment_information;

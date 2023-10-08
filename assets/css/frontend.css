@@ -299,3 +299,10 @@ input[type="week"] {
 .give-donor-multi-step-form {
   position: relative;
 }
+
+.gkm-introduction-item,
+.gkm-donation-summary-item,
+.gkm-thank-you-item,
+.gkm-class-ty-sharing-item {
+  display: none;
+}
