@@ -303,6 +303,7 @@ input[type="week"] {
 .gkm-introduction-item,
 .gkm-donation-summary-item,
 .gkm-thank-you-item,
-.gkm-class-ty-sharing-item {
+.gkm-class-ty-sharing-item,
+.gkm-legacy-form-item {
   display: none;
 }

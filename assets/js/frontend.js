@@ -303,6 +303,17 @@
       showHideContent('.gkm-class-ty-sharing-item', '');
     }
   });
+
+  // Show/hide legacy form display content
+  $(document).on('change', '#gkm-legacy-display_content', function(){
+    let displayContent = $(this).val();
+    if(displayContent === 'enabled'){
+      showHideContent('', '.gkm-legacy-form-item');
+    } else {
+      showHideContent('.gkm-legacy-form-item', '');
+    }
+  });
+  
   
 })(jQuery, window, document);
   
@@ -485,6 +496,9 @@ function formLoad(form, formType){
 
   } else if(formType === 'classic'){
 
+    /**********************
+     * Visual Appearance
+    **********************/
     let visualAppearance = form.visual_appearance;
     jQuery("#gkm-classic-container_style").val(visualAppearance.container_style);
     jQuery("#gkm-classic-primary_font").val(visualAppearance.primary_font);
@@ -492,14 +506,23 @@ function formLoad(form, formType){
     jQuery("#gkm-classic-secure_badge").val(visualAppearance.secure_badge);
     jQuery("#gkm-classic-secure_badge_text").val(visualAppearance.secure_badge_text);
 
+    /**********************
+     * Donation Amount
+    **********************/
     let donationAmount = form.donation_amount;
     jQuery("#gkm-classic-da-headline").val(donationAmount.headline);
     jQuery("#gkm-classic-da-description").val(donationAmount.description);
 
+    /**********************
+     * Donation Information
+    **********************/
     let donorInformation = form.donor_information;
     jQuery("#gkm-classic-di-headline").val(donorInformation.headline);
     jQuery("#gkm-classic-di-description").val(donorInformation.description);
 
+    /**********************
+     * Payment Information
+    **********************/
     let paymentInformation = form.payment_information;
     jQuery("#gkm-classic-pm-headline").val(paymentInformation.headline);
     jQuery("#gkm-classic-pm-description").val(paymentInformation.description);
@@ -507,6 +530,9 @@ function formLoad(form, formType){
     jQuery("#gkm-classic-donation_summary_heading").val(paymentInformation.donation_summary_heading);
     jQuery("#gkm-classic-donation_summary_location").val(paymentInformation.donation_summary_location);
 
+    /**********************
+     * Thank You
+    **********************/
     let donationReceipt = form.donation_receipt;
     jQuery("#gkm-classic-ty-headline").val(donationReceipt.headline);
     jQuery("#gkm-classic-ty-description").val(donationReceipt.description);
@@ -519,7 +545,17 @@ function formLoad(form, formType){
 
   } else {
     let displaySettings = form.display_settings;
-    let paymentInformation= form.payment_information;
+    jQuery("#gkm-legacy-display_style").val(displaySettings.display_style);
+    jQuery("#gkm-legacy-payment_display").val(displaySettings.payment_display);
+    jQuery("#gkm-legacy-reveal_label").val(displaySettings.reveal_label);
+    jQuery("#gkm-legacy-checkout_label").val(displaySettings.checkout_label);
+    jQuery("#gkm-legacy-form_floating_labels").val(displaySettings.form_floating_labels);
+    jQuery("#gkm-legacy-display_content").val(displaySettings.display_content);
+    if(displaySettings.display_content === 'enabled'){
+      showHideContent('', '.gkm-legacy-form-item');
+    }
+    jQuery("#gkm-legacy-content_placement").val(displaySettings.content_placement);
+    tinymce.get( jQuery("#gkm-legacy-legacy_display_settings_form_content").attr( 'id' ) ).setContent(displaySettings.form_content);
   }
 }
 
