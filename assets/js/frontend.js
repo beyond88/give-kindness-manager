@@ -21,7 +21,7 @@
 
             if( currentTabContent === 'give_kindness_manager-donation-options' || currentTabContent === 'give_kindness_manager-form-template' ) {
               let form_id = jQuery('.give_kindness_manager-update-campaign').attr('data-campaign-id');
-              form_ajax_call(form_id, currentTabContent);
+              tab_ajax_call(form_id, currentTabContent);
             }
 
           } else {
@@ -35,7 +35,7 @@
 
   });
   
-  function form_ajax_call(form_id, tab) {
+  function tab_ajax_call(form_id, tab) {
     if( tab !='' ) {
 
       let hideLoader = false;
@@ -61,7 +61,7 @@
             // Show hide form based on form type
             if(res.hasOwnProperty('data') && res.data.hasOwnProperty('form_type')){
               let formType = res.data.form_type;
-              $('#form-type').val(formType);
+              $('#gkm-form-type').val(formType);
               if(formType == 'sequoia'){ // multi-step form
                 $('.give-donor-multi-step-form').show();
                 $('.give-donor-classic-form').hide();
@@ -173,12 +173,11 @@
         multiple: true // set this to true for multiple file selection
       });
 
-      removeDiv('#give-kindness-manager-media-items', '.give-kindness-manager-media-item');
-
       file_frame.on( 'select', function() {
         attachment = file_frame.state().get('selection').toJSON();
         wrapper.removeClass('give-kindness-manager-hide');
         $.each(attachment, function(index, value) {
+        removeDiv('#give-kindness-manager-media-items', '.give-kindness-manager-media-item'); // remove previous image
         $(wrapper).prepend(`<div class="give-kindness-manager-media-item">
           <img src="${value.url}" alt="">
           <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
@@ -217,16 +216,15 @@
         attachment = file_frame.state().get('selection').toJSON();
         $("#give-kindness-manager-feature-image").removeClass('give-kindness-manager-hide');
         $.each(attachment, function(index, value) {
-
-        $("#give-kindness-manager-feature-image").prepend(`<div class="give-kindness-manager-media-item">
-          <img src="${value.url}" alt="">
-          <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
-            <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
-            </svg>
-          </a>
-          <input type="hidden" class="gkm-feature-image-id" name="gkm-feature-image-id" value="${value.id}">
-        </div>`); // display image
-
+          removeDiv('#give-kindness-manager-feature-image', '.give-kindness-manager-media-item'); // remove previous image
+          $("#give-kindness-manager-feature-image").prepend(`<div class="give-kindness-manager-media-item">
+            <img src="${value.url}" alt="">
+            <a href="javascript:void(0);" class="give-kindness-manager-media-item-remove" title="Remove Image">
+              <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
+              </svg>
+            </a>
+            <input type="hidden" class="gkm-feature-image-id" name="gkm-feature-image-id" id="gkm-feature-image-id" value="${value.id}">
+          </div>`); // display image
         });
       });
 
@@ -241,7 +239,7 @@
   });
 
   // Change form base on form type
-  $(document).on('change', '#form-type', function(){
+  $(document).on('change', '#gkm-form-type', function(){
     let formType = $(this).val();
     if(formType == 'sequoia'){ // multi-step form
       $('.give-donor-multi-step-form').show();
@@ -313,7 +311,119 @@
       showHideContent('.gkm-legacy-form-item', '');
     }
   });
+
+  // Update campaign settings
+  $(document).on('click', '#give_kindness_manager-update-campaign', function(){
+    
+    let that = $(this);
+    let formId = $(this).data('campaign-id');
+    let campaignStatus = $("#gkm-form-status").val();
+    let catsArray = [];
+    $('.gkm-form-category:checkbox:checked').each(function () {
+      catsArray.push($(this).val());
+    });
+    let featureImageId = $("#gkm-feature-image-id").val();
+    that.attr('disabled', true);
+    that.text(give_kindness_manager.processing);
+
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: give_kindness_manager.ajax_url,
+      data: {
+        form_id: formId,
+        campaign_status: campaignStatus,
+        cats: catsArray,
+        feature_image_id: featureImageId,
+        action: 'campaign_settings_update',
+        security: give_kindness_manager.nonce,
+      },
+      success: function(data) {
+        that.attr('disabled', false);
+        that.text(give_kindness_manager.update);
+      },
+      fail: function (data) {
+        console.log('fail==>', data);
+        that.text(give_kindness_manager.update);
+        that.attr('disabled', false);
+      }
+    });
+  }); 
   
+  // Update form template
+  $(document).on('click', '#give_kindness_manager-update-form-template', function(){
+    let that = $(this);
+    let formId = $(this).data('campaign-id');
+    let formType = $('#gkm-form-type').val();
+    if( formType == 'sequoia' ) {
+
+    } else if( formType == 'classic' ) {
+      containerStyle = $("#gkm-classic-container_style").val();
+      primaryFont = $("#gkm-classic-primary_font").val();
+      displayHeader = $("#gkm-classic-display_header").val();
+      secureBadge = $("#gkm-classic-secure_badge").val();
+      secureBadgeText = $("#gkm-classic-secure_badge_text").val();
+      daHeadline = $("#gkm-classic-da-headline").val();
+      daDescription = $("#gkm-classic-da-description").val();
+      diHeadline = $("#gkm-classic-di-headline").val();
+      diDescription = $("#gkm-classic-di-description").val();
+      pmHeadline = $("#gkm-classic-pm-headline").val();
+      pmDescription = $("#gkm-classic-pm-description").val();
+      donationSummaryEnabled = $("#gkm-classic-donation_summary_enabled").val();
+      donationSummaryHeading = $("#gkm-classic-donation_summary_heading").val();
+      donationSummaryLocation = $("#gkm-classic-donation_summary_location").val();
+      tyHeadline = $("#gkm-classic-ty-headline").val();
+      tyDescription = $("#gkm-classic-ty-description").val();
+      tySocialSharing = $("#gkm-classic-ty-social_sharing").val();
+
+      let classic = {
+        container_style : containerStyle,
+        primary_font : primaryFont,
+        display_header : displayHeader,
+        secure_badge : secureBadge,
+        secure_badge_text : secureBadgeText,
+        da_headline : daHeadline,
+        di_headline : daDescription,
+        di_headline : diHeadline,
+        di_Description : diDescription,
+        pm_headline : pmHeadline,
+        pm_description : pmDescription,
+        donation_summary_enabled : donationSummaryEnabled,
+        donation_summary_heading : donationSummaryHeading,
+        donation_summary_location : donationSummaryLocation,
+        ty_headline : tyHeadline,
+        ty_description : tyDescription,
+        ty_social_sharing : tySocialSharing,
+      }
+    } else {
+
+    }
+
+    that.attr('disabled', true);
+    that.text(give_kindness_manager.processing);
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: give_kindness_manager.ajax_url,
+      data: {
+        form_id: formId,
+        form_type: formType,
+        action: 'campaign_form_template_update',
+        security: give_kindness_manager.nonce,
+      },
+      success: function(data) {
+        console.log('res==>',data);
+        that.attr('disabled', false);
+        that.text(give_kindness_manager.update);
+      },
+      fail: function (data) {
+        console.log('fail==>', data);
+        that.text(give_kindness_manager.update);
+        that.attr('disabled', false);
+      }
+    });
+
+  });
   
 })(jQuery, window, document);
   
@@ -362,8 +472,8 @@ function editCampaign(dat){
   let feature_image_url = data['feature_image_url'];
   let cats = data['cats'];
   
-  jQuery("#form-status").val(post_status);
-  jQuery('.gkm-form-type').each(function(i, obj) {
+  jQuery("#gkm-form-status").val(post_status);
+  jQuery('.gkm-form-category').each(function(i, obj) {
     cat_id = parseInt(jQuery(this).val());
     if( cats.includes(cat_id) ) {
       jQuery(this).attr('checked','checked');
@@ -380,7 +490,7 @@ function editCampaign(dat){
         <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
         </svg>
       </a>
-      <input type="hidden" class="gkm-feature-image-id" name="gkm-feature-image-id" value="${feature_image_id}">
+      <input type="hidden" class="gkm-feature-image-id" name="gkm-feature-image-id" id="gkm-feature-image-id" value="${feature_image_id}">
     </div>`); // display image
   }
 

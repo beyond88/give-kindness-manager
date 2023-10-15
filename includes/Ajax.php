@@ -12,9 +12,13 @@ class Ajax {
     public function __construct() {
         add_action( 'wp_ajax_update_settings', array( $this, 'update_settings') );
         add_action( 'wp_ajax_nopriv_update_settings', array( $this, 'update_settings') );
-
         add_action( 'wp_ajax_get_form_info', array( $this, 'get_form_info') );
         add_action( 'wp_ajax_nopriv_get_form_info', array( $this, 'get_form_info') );
+        add_action( 'wp_ajax_campaign_settings_update', array( $this, 'campaign_settings_update') );
+        add_action( 'wp_ajax_nopriv_campaign_settings_update', array( $this, 'campaign_settings_update') );
+
+        add_action( 'wp_ajax_campaign_form_template_update', array( $this, 'campaign_form_template_update') );
+        add_action( 'wp_ajax_nopriv_campaign_form_template_update', array( $this, 'campaign_form_template_update') );
     }
 
     /**
@@ -103,5 +107,54 @@ class Ajax {
             }
         }
         wp_send_json_success( $form_data );
+    }
+
+    /**
+     * Update campaign settings
+     * 
+     */
+    public function campaign_settings_update() {
+        check_ajax_referer( 'give_kindness-manager-nonce', 'security' );
+        if( $_POST ) {
+            $form_id = wp_unslash( $_POST['form_id'] );
+            $campaign_status = wp_unslash( $_POST['campaign_status'] );
+            $cats = wp_unslash( $_POST['cats'] );
+            $feature_image_id = wp_unslash( $_POST['feature_image_id'] );
+
+            if( ! empty( $form_id ) ) {
+                wp_update_post(array(
+                    'ID'    =>  $form_id,
+                    'post_status'   =>  $campaign_status
+                ));
+
+                wp_set_post_terms( $form_id, $cats, 'give_forms_category' );
+
+                if( ! empty( $feature_image_id ) ) {
+                    set_post_thumbnail( $form_id, $feature_image_id );
+                }
+            }
+
+            wp_send_json_success(['Form updated successfully']);
+        }
+    }
+
+    /**
+     * Update campaign form template
+     * 
+     */
+    public function campaign_form_template_update() {
+        check_ajax_referer( 'give_kindness-manager-nonce', 'security' );
+        if( $_POST ) {
+            $form_id = wp_unslash( $_POST['form_id'] );
+            $form_type = wp_unslash( $_POST['form_type'] );
+            // $cats = wp_unslash( $_POST['cats'] );
+            // $feature_image_id = wp_unslash( $_POST['feature_image_id'] );
+
+            if( ! empty( $form_id ) ) {
+                update_post_meta( $form_id, '_give_form_template', $form_type );
+            }
+
+            wp_send_json_success(['Form updated successfully']);
+        }
     }
 }
