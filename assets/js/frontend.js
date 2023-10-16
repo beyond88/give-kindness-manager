@@ -184,7 +184,7 @@
             <svg style="width: 15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times-circle" class="svg-inline--fa fa-times-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#ff0000" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"></path>
             </svg>
           </a>
-          <input type="hidden" class="gkm-campaign-files" name="gkm-campaign-files[]" value="${value.id}">
+          <input type="hidden" class="gkm-campaign-files" name="gkm-campaign-files" id="gkm-campaign-files" value="${value.id}">
         </div>`); // display image
         });
       });
@@ -355,73 +355,93 @@
     let that = $(this);
     let formId = $(this).data('campaign-id');
     let formType = $('#gkm-form-type').val();
+
+    let formData = {};
     if( formType == 'sequoia' ) {
-
+      formData = {
+        google_fonts: $("#gkm-google_fonts").val(),
+        decimals_enabled: $("#gkm-decimals_enabled").val(),
+        introduction_enabled: $("#gkm-introduction_enabled").val(),
+        introduction_headline: $("#gkm-introduction_headline").val(),
+        introduction_description: $("#gkm-introduction_description").val(),
+        payment_header_label: $("#gkm-payment_header_label").val(),
+        payment_content: $("#gkm-payment_content").val(),
+        next_label: $("#gkm-next_label").val(),
+        payment_info_header_label: $("#gkm-payment_info_header_label").val(),
+        payment_info_headline: $("#gkm-payment_info_headline").val(),
+        payment_information_descritpion: $("#gkm-payment_info_description").val(),
+        donation_summary_enabled: $("#gkm-donation_summary_enabled").val(),
+        donation_summary_heading: $("#gkm-donation_summary_heading").val(),
+        donation_summary_location: $("#gkm-donation_summary_location").val(),
+        checkout_label: $("#gkm-checkout_label").val(),
+        ty_headline: $("#gkm-ty_headline").val(),
+        ty_description: $("#gkm-ty_description").val(),
+        ty_sharing: $("#gkm-ty_sharing").val(),
+        ty_sharing_instructions: $("#gkm-ty_sharing_instructions").val(),
+        ty_twitter_message: $("#gkm-ty_twitter_message").val(),
+      };
     } else if( formType == 'classic' ) {
-      containerStyle = $("#gkm-classic-container_style").val();
-      primaryFont = $("#gkm-classic-primary_font").val();
-      displayHeader = $("#gkm-classic-display_header").val();
-      secureBadge = $("#gkm-classic-secure_badge").val();
-      secureBadgeText = $("#gkm-classic-secure_badge_text").val();
-      daHeadline = $("#gkm-classic-da-headline").val();
-      daDescription = $("#gkm-classic-da-description").val();
-      diHeadline = $("#gkm-classic-di-headline").val();
-      diDescription = $("#gkm-classic-di-description").val();
-      pmHeadline = $("#gkm-classic-pm-headline").val();
-      pmDescription = $("#gkm-classic-pm-description").val();
-      donationSummaryEnabled = $("#gkm-classic-donation_summary_enabled").val();
-      donationSummaryHeading = $("#gkm-classic-donation_summary_heading").val();
-      donationSummaryLocation = $("#gkm-classic-donation_summary_location").val();
-      tyHeadline = $("#gkm-classic-ty-headline").val();
-      tyDescription = $("#gkm-classic-ty-description").val();
-      tySocialSharing = $("#gkm-classic-ty-social_sharing").val();
-
-      let classic = {
-        container_style : containerStyle,
-        primary_font : primaryFont,
-        display_header : displayHeader,
-        secure_badge : secureBadge,
-        secure_badge_text : secureBadgeText,
-        da_headline : daHeadline,
-        di_headline : daDescription,
-        di_headline : diHeadline,
-        di_Description : diDescription,
-        pm_headline : pmHeadline,
-        pm_description : pmDescription,
-        donation_summary_enabled : donationSummaryEnabled,
-        donation_summary_heading : donationSummaryHeading,
-        donation_summary_location : donationSummaryLocation,
-        ty_headline : tyHeadline,
-        ty_description : tyDescription,
-        ty_social_sharing : tySocialSharing,
+      formData = {
+        container_style: $("#gkm-classic-container_style").val(),
+        primary_font: $("#gkm-classic-primary_font").val(),
+        display_header: $("#gkm-classic-display_header").val(),
+        secure_badge: $("#gkm-classic-secure_badge").val(),
+        secure_badge_text: $("#gkm-classic-secure_badge_text").val(),
+        da_headline: $("#gkm-classic-da-headline").val(),
+        di_headline: $("#gkm-classic-da-description").val(),
+        di_headline: $("#gkm-classic-di-headline").val(),
+        di_Description: $("#gkm-classic-di-description").val(),
+        pm_headline: $("#gkm-classic-pm-headline").val(),
+        pm_description: $("#gkm-classic-pm-description").val(),
+        donation_summary_enabled: $("#gkm-classic-donation_summary_enabled").val(),
+        donation_summary_heading: $("#gkm-classic-donation_summary_heading").val(),
+        donation_summary_location: $("#gkm-classic-donation_summary_location").val(),
+        ty_headline: $("#gkm-classic-ty-headline").val(),
+        ty_description: $("#gkm-classic-ty-description").val(),
+        ty_social_sharing: $("#gkm-classic-ty-social_sharing").val(),
+        ty_sharing_instructions: $("#gkm-classic-ty-sharing_instructions").val(),
+        ty_twitter_message: $("#gkm-classic-ty-twitter_message").val(),
       }
     } else {
-
+      formData = {
+        display_style: $("#gkm-legacy-display_style").val(),
+        payment_display: $("#gkm-legacy-payment_display").val(),
+        reveal_label: $("#gkm-legacy-reveal_label").val(),
+        checkout_label: $("#gkm-legacy-checkout_label").val(),
+        form_floating_labels: $("#gkm-legacy-form_floating_labels").val(),
+        display_content: $("#gkm-legacy-display_content").val(),
+        content_placement: $("#gkm-legacy-content_placement").val(),
+        legacy_display_settings_form_content: $("#gkm-legacy-legacy_display_settings_form_content").val(),
+      }
     }
 
-    that.attr('disabled', true);
-    that.text(give_kindness_manager.processing);
-    $.ajax({
-      type: 'POST',
-      dataType: 'json',
-      url: give_kindness_manager.ajax_url,
-      data: {
-        form_id: formId,
-        form_type: formType,
-        action: 'campaign_form_template_update',
-        security: give_kindness_manager.nonce,
-      },
-      success: function(data) {
-        console.log('res==>',data);
-        that.attr('disabled', false);
-        that.text(give_kindness_manager.update);
-      },
-      fail: function (data) {
-        console.log('fail==>', data);
-        that.text(give_kindness_manager.update);
-        that.attr('disabled', false);
-      }
-    });
+    console.log('Before form submit==>',formData);
+
+
+    // that.attr('disabled', true);
+    // that.text(give_kindness_manager.processing);
+    // $.ajax({
+    //   type: 'POST',
+    //   dataType: 'json',
+    //   url: give_kindness_manager.ajax_url,
+    //   data: {
+    //     form_id: formId,
+    //     form_type: formType,
+    //     form_data: formData,
+    //     action: 'campaign_form_template_update',
+    //     security: give_kindness_manager.nonce,
+    //   },
+    //   success: function(data) {
+    //     console.log('res==>',data);
+    //     that.attr('disabled', false);
+    //     that.text(give_kindness_manager.update);
+    //   },
+    //   fail: function (data) {
+    //     console.log('fail==>', data);
+    //     that.text(give_kindness_manager.update);
+    //     that.attr('disabled', false);
+    //   }
+    // });
 
   });
   

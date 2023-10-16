@@ -147,14 +147,21 @@ class Ajax {
         if( $_POST ) {
             $form_id = wp_unslash( $_POST['form_id'] );
             $form_type = wp_unslash( $_POST['form_type'] );
-            // $cats = wp_unslash( $_POST['cats'] );
-            // $feature_image_id = wp_unslash( $_POST['feature_image_id'] );
+            $form_data = wp_unslash( $_POST['form_data'] );
 
             if( ! empty( $form_id ) ) {
-                update_post_meta( $form_id, '_give_form_template', $form_type );
+
+                if( $form_type == '' ){
+
+                } else if( $form_type == '' ) {
+
+                } else {
+
+                }
+                // update_post_meta( $form_id, '_give_form_template', $form_type );
             }
 
-            wp_send_json_success(['Form updated successfully']);
+            wp_send_json_success($form_data);
         }
     }
 }
