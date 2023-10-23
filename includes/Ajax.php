@@ -149,19 +149,124 @@ class Ajax {
             $form_type = wp_unslash( $_POST['form_type'] );
             $form_data = wp_unslash( $_POST['form_data'] );
 
-            if( ! empty( $form_id ) ) {
+            if( ! empty( $form_id ) && intval( $form_id ) ) {
 
-                if( $form_type == '' ){
+                update_post_meta( $form_id, '_give_form_template', $form_type);
 
-                } else if( $form_type == '' ) {
+                if( $form_type == 'sequoia' ){
+
+                    $google_fonts = $form_data['google_fonts'];
+                    $decimals_enabled = $form_data['decimals_enabled'];
+                    $introduction_enabled = $form_data['introduction_enabled'];
+                    $introduction_headline = $form_data['introduction_headline'];
+                    $introduction_description = $form_data['introduction_description'];
+                    $payment_header_label = $form_data['payment_header_label'];
+                    $payment_content = $form_data['payment_content'];
+                    $next_label = $form_data['next_label'];
+                    $payment_info_header_label = $form_data['payment_info_header_label'];
+                    $payment_info_headline = $form_data['payment_info_headline'];
+                    $payment_information_descritpion = $form_data['payment_information_descritpion'];
+                    $donation_summary_enabled = $form_data['donation_summary_enabled'];
+                    $donation_summary_heading = $form_data['donation_summary_heading'];
+                    $donation_summary_location = $form_data['donation_summary_location'];
+                    $checkout_label = $form_data['checkout_label'];
+                    $ty_headline = $form_data['ty_headline'];
+                    $ty_description = $form_data['ty_description'];
+                    $ty_sharing = $form_data['ty_sharing'];
+                    $ty_sharing_instructions = $form_data['ty_sharing_instructions'];
+                    $ty_twitter_message = $form_data['ty_twitter_message'];
+
+                } else if( $form_type == 'classic' ) {
+
+                    $container_style = $form_data['container_style'];
+                    $primary_font = $form_data['primary_font'];
+                    $display_header = $form_data['display_header'];
+                    $main_heading = $form_data['main_heading'];
+                    $main_description = $form_data['main_description'];
+                    $secure_badge = $form_data['secure_badge'];
+                    $secure_badge_text = $form_data['secure_badge_text'];
+                    $da_headline = $form_data['da_headline'];
+                    $da_description = $form_data['da_description'];
+                    $di_headline = $form_data['di_headline'];
+                    $di_description = $form_data['di_Description'];
+                    $pm_headline = $form_data['pm_headline'];
+                    $pm_description = $form_data['pm_description'];
+                    $donation_summary_enabled = $form_data['donation_summary_enabled'];
+                    $donation_summary_heading = $form_data['donation_summary_heading'];
+                    $donation_summary_location = $form_data['donation_summary_location'];
+                    $ty_headline = $form_data['ty_headline'];
+                    $ty_description = $form_data['ty_description'];
+                    $ty_social_sharing = $form_data['ty_social_sharing'];
+                    $ty_sharing_instructions = $form_data['ty_sharing_instructions'];
+                    $ty_twitter_message = $form_data['ty_twitter_message'];
+                    
+                    $settings = give_get_meta( $form_id, '_give_classic_form_template_settings', true);
+
+                    $settings['visual_appearance']['container_style'] = $container_style;
+                    $settings['visual_appearance']['primary_font'] = $primary_font;
+                    $settings['visual_appearance']['display_header'] = $display_header;
+                    $settings['visual_appearance']['main_heading'] = $main_heading;
+                    $settings['visual_appearance']['description'] = $main_description;
+                    $settings['visual_appearance']['secure_badge'] = $secure_badge;
+                    $settings['visual_appearance']['secure_badge_text'] = $secure_badge_text;
+
+                    $settings['donation_amount']['headline'] = $da_headline;
+                    $settings['donation_amount']['description'] = $da_description;
+
+                    $settings['donor_information']['headline'] = $di_headline;
+                    $settings['donor_information']['description'] = $di_description;
+
+                    $settings['payment_information']['headline'] = $pm_headline;
+                    $settings['payment_information']['description'] = $pm_description;
+                    $settings['payment_information']['donation_summary_enabled'] = $donation_summary_enabled;
+                    $settings['payment_information']['donation_summary_heading'] = $donation_summary_heading;
+                    $settings['payment_information']['donation_summary_location'] = $donation_summary_location;
+
+                    $settings['donation_receipt']['headline'] = $ty_headline;
+                    $settings['donation_receipt']['description'] = $ty_description;
+                    $settings['donation_receipt']['social_sharing'] = $ty_social_sharing;
+                    $settings['donation_receipt']['sharing_instructions'] = $ty_sharing_instructions;
+                    $settings['donation_receipt']['twitter_message'] = $ty_twitter_message;
+
+                    give_update_meta( $form_id, '_give_classic_form_template_settings', $settings );
 
                 } else {
 
-                }
-                // update_post_meta( $form_id, '_give_form_template', $form_type );
-            }
+                    $checkout_label = $form_data['checkout_label'];
+                    $content_placement = $form_data['content_placement'];
+                    $display_content = $form_data['display_content'];
+                    $display_style = $form_data['display_style'];
+                    $form_floating_labels = $form_data['form_floating_labels'];
+                    $legacy_display_settings_form_content = $form_data['legacy_display_settings_form_content'];
+                    $payment_display = $form_data['payment_display'];
+                    $reveal_label = $form_data['reveal_label'];
 
-            wp_send_json_success($form_data);
+                    $settings = give_get_meta( $form_id, '_give_legacy_form_template_settings', true);
+
+                    $settings['display_settings']['display_style'] = $display_style;
+                    $settings['display_settings']['payment_display'] = $payment_display;
+                    $settings['display_settings']['reveal_label'] = $reveal_label;
+                    $settings['display_settings']['checkout_label'] = $checkout_label;
+                    $settings['display_settings']['form_floating_labels'] = $form_floating_labels;
+                    $settings['display_settings']['display_content'] = $display_content;
+                    $settings['display_settings']['content_placement'] = $content_placement;
+                    $settings['display_settings']['form_content'] = $legacy_display_settings_form_content;
+
+                    give_update_meta( $form_id, '_give_checkout_label', $checkout_label );
+                    give_update_meta( $form_id, '_give_display_style', $display_style );
+                    give_update_meta( $form_id, '_give_payment_display', $payment_display );
+                    give_update_meta( $form_id, '_give_reveal_label', $reveal_label );
+                    give_update_meta( $form_id, '_give_form_floating_labels', $form_floating_labels );
+                    give_update_meta( $form_id, '_give_display_content', $display_content );
+                    give_update_meta( $form_id, '_give_content_placement', $content_placement );
+                    give_update_meta( $form_id, '_give_form_content', $legacy_display_settings_form_content );
+                    give_update_meta( $form_id, '_give_legacy_form_template_settings', $settings );
+
+                }
+
+            }
+            // wp_die();
+            wp_send_json_success(['success'=> true]);
         }
     }
 }

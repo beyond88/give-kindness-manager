@@ -12,6 +12,12 @@
         </div>
     </fieldset>
 
+    <?php 
+        // echo "<pre>";
+        // print_r(give_get_meta( 9231, '_give_classic_form_template_settings', true));
+        // echo "</pre>";
+    ?>
+
     <?php give_kindness_manager_templates_part( 'campaigns/forms/multi-step', NULL ); ?>
     <?php give_kindness_manager_templates_part( 'campaigns/forms/classic', NULL ); ?>
     <?php give_kindness_manager_templates_part( 'campaigns/forms/legacy', NULL ); ?>

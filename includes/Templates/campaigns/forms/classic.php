@@ -50,6 +50,25 @@
             </div>
         </div>
     </fieldset>
+
+    <fieldset class="give-donor-dashboard-radio-control gkm-classic-display-header-item">
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="continue"><?php echo __('Main Heading','give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <input name="classic[visual_appearance][main_heading]" id="gkm-classic-main_heading" type="text" placeholder="<?php echo __('Support Our Cause','give-kindness-manager'); ?>">
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="give-donor-dashboard-radio-control gkm-classic-display-header-item">
+        <div class="give-donor-dashboard-text-control">
+            <label class="give-donor-dashboard-text-control__label" for="continue"><?php echo __('Description','give-kindness-manager'); ?></label>
+            <div class="give-donor-dashboard-text-control__input">
+                <textarea name="classic[visual_appearance][description]" id="gkm-classic-main_description" placeholder="Help our organization by donating today! All donations go directly to making a difference for our cause."></textarea>
+            </div>
+        </div>
+    </fieldset>
+
     <fieldset class="give-donor-dashboard-radio-control">
         <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Secure Donation Badge', 'give-kindness-manager'); ?></legend>
         <div class="give_kindness_manager-inline-block">
@@ -61,7 +80,7 @@
             </div>
         </div>
     </fieldset>
-    <fieldset class="give-donor-dashboard-radio-control">
+    <fieldset class="give-donor-dashboard-radio-control gkm-classic-secure-badge-item">
         <div class="give-donor-dashboard-text-control">
             <label class="give-donor-dashboard-text-control__label" for="continue"><?php echo __('Secure Donation Badge Text','give-kindness-manager'); ?></label>
             <div class="give-donor-dashboard-text-control__input">

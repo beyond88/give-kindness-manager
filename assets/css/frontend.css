@@ -304,6 +304,9 @@ input[type="week"] {
 .gkm-donation-summary-item,
 .gkm-thank-you-item,
 .gkm-class-ty-sharing-item,
-.gkm-legacy-form-item {
+.gkm-legacy-form-item,
+.gkm-legacy-continue-item,
+.gkm-classic-display-header-item,
+.gkm-classic-secure-badge-item {
   display: none;
 }

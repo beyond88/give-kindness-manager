@@ -29,7 +29,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="give-donor-dashboard-radio-control">
+    <fieldset class="give-donor-dashboard-radio-control gkm-legacy-continue-item">
         <div class="give-donor-dashboard-text-control">
             <label class="give-donor-dashboard-text-control__label" for="continue"><?php echo __('Continue Button','give-kindness-manager'); ?></label>
             <div class="give-donor-dashboard-text-control__input">

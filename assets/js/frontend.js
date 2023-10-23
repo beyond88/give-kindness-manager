@@ -312,6 +312,46 @@
     }
   });
 
+  // Show/hide legacy form continue button by display option field
+  $(document).on('change', '#gkm-legacy-payment_display', function(){
+    let displayContent = $(this).val();
+    if(displayContent === 'button' || displayContent === 'modal' || displayContent === 'reveal'){
+      showHideContent('', '.gkm-legacy-continue-item');
+    } else {
+      showHideContent('.gkm-legacy-continue-item', '');
+    }
+  });
+
+  // Show/hide legacy form continue button by display option field
+  $(document).on('change', '#gkm-legacy-payment_display', function(){
+    let displayContent = $(this).val();
+    if(displayContent === 'button' || displayContent === 'modal' || displayContent === 'reveal'){
+      showHideContent('', '.gkm-legacy-continue-item');
+    } else {
+      showHideContent('.gkm-legacy-continue-item', '');
+    }
+  });
+
+  // Show/hide classic form display_header item
+  $(document).on('change', '#gkm-classic-display_header', function(){
+    let displayContent = $(this).val();
+    if(displayContent === 'enabled'){
+      showHideContent('', '.gkm-classic-display-header-item');
+    } else {
+      showHideContent('.gkm-classic-display-header-item', '');
+    }
+  });
+
+  // Show/hide classic form display badge item
+  $(document).on('change', '#gkm-classic-secure_badge', function(){
+    let displayContent = $(this).val();
+    if(displayContent === 'enabled'){
+      showHideContent('', '.gkm-classic-secure-badge-item');
+    } else {
+      showHideContent('.gkm-classic-secure-badge-item', '');
+    }
+  });
+
   // Update campaign settings
   $(document).on('click', '#give_kindness_manager-update-campaign', function(){
     
@@ -385,10 +425,12 @@
         container_style: $("#gkm-classic-container_style").val(),
         primary_font: $("#gkm-classic-primary_font").val(),
         display_header: $("#gkm-classic-display_header").val(),
+        main_heading: $("#gkm-classic-main_heading").val(),
+        main_description: $("#gkm-classic-main_description").val(),
         secure_badge: $("#gkm-classic-secure_badge").val(),
         secure_badge_text: $("#gkm-classic-secure_badge_text").val(),
         da_headline: $("#gkm-classic-da-headline").val(),
-        di_headline: $("#gkm-classic-da-description").val(),
+        da_description: $("#gkm-classic-da-description").val(),
         di_headline: $("#gkm-classic-di-headline").val(),
         di_Description: $("#gkm-classic-di-description").val(),
         pm_headline: $("#gkm-classic-pm-headline").val(),
@@ -411,37 +453,35 @@
         form_floating_labels: $("#gkm-legacy-form_floating_labels").val(),
         display_content: $("#gkm-legacy-display_content").val(),
         content_placement: $("#gkm-legacy-content_placement").val(),
-        legacy_display_settings_form_content: $("#gkm-legacy-legacy_display_settings_form_content").val(),
+        legacy_display_settings_form_content: tinymce.get( $("#gkm-legacy-legacy_display_settings_form_content").attr( 'id' ) ).getContent( { format: 'text' } ),
       }
     }
+    // console.log('Before form submit==>',formData);
 
-    console.log('Before form submit==>',formData);
-
-
-    // that.attr('disabled', true);
-    // that.text(give_kindness_manager.processing);
-    // $.ajax({
-    //   type: 'POST',
-    //   dataType: 'json',
-    //   url: give_kindness_manager.ajax_url,
-    //   data: {
-    //     form_id: formId,
-    //     form_type: formType,
-    //     form_data: formData,
-    //     action: 'campaign_form_template_update',
-    //     security: give_kindness_manager.nonce,
-    //   },
-    //   success: function(data) {
-    //     console.log('res==>',data);
-    //     that.attr('disabled', false);
-    //     that.text(give_kindness_manager.update);
-    //   },
-    //   fail: function (data) {
-    //     console.log('fail==>', data);
-    //     that.text(give_kindness_manager.update);
-    //     that.attr('disabled', false);
-    //   }
-    // });
+    that.attr('disabled', true);
+    that.text(give_kindness_manager.processing);
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: give_kindness_manager.ajax_url,
+      data: {
+        form_id: formId,
+        form_type: formType,
+        form_data: formData,
+        action: 'campaign_form_template_update',
+        security: give_kindness_manager.nonce,
+      },
+      success: function(data) {
+        console.log('res==>',data);
+        that.attr('disabled', false);
+        that.text(give_kindness_manager.update);
+      },
+      fail: function (data) {
+        console.log('fail==>', data);
+        that.text(give_kindness_manager.update);
+        that.attr('disabled', false);
+      }
+    });
 
   });
   
@@ -633,7 +673,16 @@ function formLoad(form, formType){
     jQuery("#gkm-classic-container_style").val(visualAppearance.container_style);
     jQuery("#gkm-classic-primary_font").val(visualAppearance.primary_font);
     jQuery("#gkm-classic-display_header").val(visualAppearance.display_header);
+    if(visualAppearance.display_header == 'enabled'){
+      showHideContent('', '.gkm-classic-display-header-item');
+    }
+    jQuery("#gkm-classic-main_heading").val(visualAppearance.main_heading);
+    jQuery("#gkm-classic-main_description").val(visualAppearance.description);
+    
     jQuery("#gkm-classic-secure_badge").val(visualAppearance.secure_badge);
+    if(visualAppearance.secure_badge == 'enabled'){
+      showHideContent('', '.gkm-classic-secure-badge-item');
+    }
     jQuery("#gkm-classic-secure_badge_text").val(visualAppearance.secure_badge_text);
 
     /**********************
@@ -674,9 +723,16 @@ function formLoad(form, formType){
     jQuery("#gkm-classic-ty-twitter_message").val(donationReceipt.twitter_message);
 
   } else {
-    let displaySettings = form.display_settings;
+
+    let displaySettings = form;
+    if(displaySettings.hasOwnProperty("display_settings")){
+      displaySettings = form.display_settings;
+    }
     jQuery("#gkm-legacy-display_style").val(displaySettings.display_style);
     jQuery("#gkm-legacy-payment_display").val(displaySettings.payment_display);
+    if(displaySettings.payment_display === 'button' || displaySettings.display_style === 'modal' || displaySettings.display_style === 'reveal'){
+      showHideContent('', '.gkm-legacy-continue-item');
+    }
     jQuery("#gkm-legacy-reveal_label").val(displaySettings.reveal_label);
     jQuery("#gkm-legacy-checkout_label").val(displaySettings.checkout_label);
     jQuery("#gkm-legacy-form_floating_labels").val(displaySettings.form_floating_labels);
