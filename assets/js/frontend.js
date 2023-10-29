@@ -522,9 +522,7 @@
         password: password
       },
       success: function(data) {
-        
         that.attr('disabled', false);
-
         if( data.status === 200 ) {
           window.location.reload();
         }
