@@ -14,7 +14,7 @@
 
     <?php 
         // echo "<pre>";
-        // print_r(give_get_meta( 9231, '_give_classic_form_template_settings', true));
+        // print_r(give_get_meta( 9231, '_give_sequoia_form_template_settings', true));
         // echo "</pre>";
     ?>
 

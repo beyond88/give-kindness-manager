@@ -398,24 +398,34 @@
 
     let formData = {};
     if( formType == 'sequoia' ) {
+      let introImage = $("#give-kindness-manager-media-items").find('img').attr('src');
+      if( typeof introImage === "undefined" ){
+        introImage = '';
+      }
+
       formData = {
         google_fonts: $("#gkm-google_fonts").val(),
         decimals_enabled: $("#gkm-decimals_enabled").val(),
         introduction_enabled: $("#gkm-introduction_enabled").val(),
         introduction_headline: $("#gkm-introduction_headline").val(),
         introduction_description: $("#gkm-introduction_description").val(),
+        image: introImage,
+        donate_label: $("#gkm-donate_label").val(),
+
         payment_header_label: $("#gkm-payment_header_label").val(),
         payment_content: $("#gkm-payment_content").val(),
         next_label: $("#gkm-next_label").val(),
+
         payment_info_header_label: $("#gkm-payment_info_header_label").val(),
         payment_info_headline: $("#gkm-payment_info_headline").val(),
-        payment_information_descritpion: $("#gkm-payment_info_description").val(),
+        payment_info_descritpion: $("#gkm-payment_info_description").val(),
         donation_summary_enabled: $("#gkm-donation_summary_enabled").val(),
         donation_summary_heading: $("#gkm-donation_summary_heading").val(),
         donation_summary_location: $("#gkm-donation_summary_location").val(),
         checkout_label: $("#gkm-checkout_label").val(),
+
         ty_headline: $("#gkm-ty_headline").val(),
-        ty_description: $("#gkm-ty_description").val(),
+        ty_description: tinymce.get( $("#gkm-ty_description").attr( 'id' ) ).getContent( { format: 'text' } ),
         ty_sharing: $("#gkm-ty_sharing").val(),
         ty_sharing_instructions: $("#gkm-ty_sharing_instructions").val(),
         ty_twitter_message: $("#gkm-ty_twitter_message").val(),
@@ -657,6 +667,9 @@ function formLoad(form, formType){
     let thankYou = form['thank-you'];
     jQuery("#gkm-ty_headline").val(thankYou['headline']);
     jQuery("#gkm-ty_description").val(thankYou['description']);
+    if( thankYou['description'] != ''){
+      tinymce.get( jQuery("#gkm-ty_description").attr( 'id' ) ).setContent(thankYou['description']);
+    }
     jQuery("#gkm-ty_sharing").val(thankYou['sharing']);
     if(thankYou['sharing'] == "enabled"){
       showHideContent('', '.gkm-thank-you-item');

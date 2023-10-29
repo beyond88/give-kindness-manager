@@ -160,21 +160,58 @@ class Ajax {
                     $introduction_enabled = $form_data['introduction_enabled'];
                     $introduction_headline = $form_data['introduction_headline'];
                     $introduction_description = $form_data['introduction_description'];
+                    $image = $form_data['image'];
+                    $donate_label = $form_data['donate_label'];
+
                     $payment_header_label = $form_data['payment_header_label'];
                     $payment_content = $form_data['payment_content'];
                     $next_label = $form_data['next_label'];
+
                     $payment_info_header_label = $form_data['payment_info_header_label'];
                     $payment_info_headline = $form_data['payment_info_headline'];
-                    $payment_information_descritpion = $form_data['payment_information_descritpion'];
+                    $payment_info_descritpion = $form_data['payment_info_descritpion'];
                     $donation_summary_enabled = $form_data['donation_summary_enabled'];
                     $donation_summary_heading = $form_data['donation_summary_heading'];
                     $donation_summary_location = $form_data['donation_summary_location'];
                     $checkout_label = $form_data['checkout_label'];
+
                     $ty_headline = $form_data['ty_headline'];
                     $ty_description = $form_data['ty_description'];
                     $ty_sharing = $form_data['ty_sharing'];
                     $ty_sharing_instructions = $form_data['ty_sharing_instructions'];
                     $ty_twitter_message = $form_data['ty_twitter_message'];
+
+                    $settings = give_get_meta( $form_id, '_give_sequoia_form_template_settings', true);
+
+                    // $settings['visual_appearance']['primary_color'] = '';
+                    $settings['visual_appearance']['google-fonts'] = $google_fonts;
+                    $settings['visual_appearance']['decimals_enabled'] = $decimals_enabled;
+                    $settings['introduction']['enabled'] = $introduction_enabled;
+                    $settings['introduction']['headline'] = $introduction_headline;
+                    $settings['introduction']['description'] = $introduction_description;
+                    $settings['introduction']['image'] = $image;
+                    $settings['introduction']['donate_label'] = $donate_label;
+                    
+                    $settings['payment_information']['donation_summary_enabled'] = $donation_summary_enabled;
+                    $settings['payment_information']['donation_summary_heading'] = $donation_summary_heading;
+                    $settings['payment_information']['donation_summary_location'] = $donation_summary_location;
+                    $settings['payment_information']['header_label'] = $payment_info_header_label;
+                    $settings['payment_information']['headline'] = $payment_info_headline;
+                    $settings['payment_information']['description'] = $payment_info_descritpion;
+                    $settings['payment_information']['checkout_label'] = $checkout_label;
+
+                    $settings['payment_amount']['header_label'] = $payment_header_label;
+                    $settings['payment_amount']['content'] = $payment_content;
+                    $settings['payment_amount']['next_label'] = $next_label;
+
+                    $settings['thank-you']['headline'] = $ty_headline;
+                    $settings['thank-you']['description'] = $ty_description;
+                    $settings['thank-you']['sharing'] = $ty_sharing;
+                    $settings['thank-you']['sharing_instruction'] = $ty_sharing_instructions;
+                    $settings['thank-you']['twitter_message'] = $ty_twitter_message;
+
+                    give_update_meta( $form_id, '_give_checkout_label', $checkout_label );
+                    give_update_meta( $form_id, '_give_sequoia_form_template_settings', $settings );
 
                 } else if( $form_type == 'classic' ) {
 
