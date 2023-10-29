@@ -56,7 +56,6 @@
         },
         success: function(res) {
           if(res.hasOwnProperty('success') && res.success == true) {
-            console.log('tab==>',res);
 
             // Show hide form based on form type
             if(res.hasOwnProperty('data') && res.data.hasOwnProperty('form_type')){
@@ -482,7 +481,6 @@
         security: give_kindness_manager.nonce,
       },
       success: function(data) {
-        console.log('res==>',data);
         that.attr('disabled', false);
         that.text(give_kindness_manager.update);
       },
