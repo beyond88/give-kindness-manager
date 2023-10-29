@@ -560,7 +560,7 @@
         headers: {'X-WP-Nonce': give_kindness_manager.apiNonce },
         url: give_kindness_manager.giveApiURL+'donor-dashboard/logout',
         success: function(data) {
-          if( data.status === 200 ) {
+          if(data.status === 200) {
             window.location.reload();
           }
         },
