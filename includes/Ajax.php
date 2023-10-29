@@ -306,4 +306,8 @@ class Ajax {
             wp_send_json_success(['success'=> true]);
         }
     }
+
+    public function user_login() {
+        
+    }
 }

@@ -494,6 +494,83 @@
     });
 
   });
+
+  /**************************
+  *  
+  * Login
+  * 
+  ***************************/
+  $(document).on('click', '#give-kindness-manager-login-submit', function(){
+
+    let that = $(this);
+    let login = $('#give-kindness-manager-username').val();
+    let password = $('#give-kindness-manager-password').val();
+
+    if( login == '' || password == '' ){
+      return false; 
+    }
+
+    that.attr('disabled', true);
+
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      headers: {'X-WP-Nonce': give_kindness_manager.apiNonce },
+      url: give_kindness_manager.giveApiURL+'donor-dashboard/login',
+      data: {
+        login: login,
+        password: password
+      },
+      success: function(data) {
+        
+        that.attr('disabled', false);
+
+        if( data.status === 200 ) {
+          window.location.reload();
+        }
+
+        if( data.status === 400 ) {
+          $('#give-kindness-manager-username').val('');
+          $('#give-kindness-manager-password').val('');
+
+          const msg = data.body_response.message; 
+          if( that.siblings('.give-donor-dashboard__auth-modal-error').length > 0 ){
+            that.siblings('.give-donor-dashboard__auth-modal-error').text(msg);
+          } else {
+            that.after(`<div class="give-donor-dashboard__auth-modal-error">${msg}</div>`);
+          }
+        }
+      },
+      error: function (error) {
+        console.log('fail==>', error);
+      }
+    });
+  });
+
+  /**************************
+  *  
+  * Logout
+  * 
+  ***************************/
+  $(document).on('click', '#give-kindness-manager-logout, .give-kindness-manager-logout', function(){
+    if (confirm(give_kindness_manager.logOutMsg) == true) {
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        headers: {'X-WP-Nonce': give_kindness_manager.apiNonce },
+        url: give_kindness_manager.giveApiURL+'donor-dashboard/logout',
+        success: function(data) {
+          if( data.status === 200 ) {
+            window.location.reload();
+          }
+        },
+        error: function (error) {
+          console.log('fail==>', error);
+        }
+      });
+    }
+  });
+
   
 })(jQuery, window, document);
   

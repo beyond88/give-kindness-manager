@@ -93,6 +93,9 @@ class Assets {
             'update' => __('Update', 'give-kindness-manager'),
             'processing' => __('Processing', 'give-kindness-manager'),
             'save' => __('Save', 'give-kindness-manager'),
+            'apiNonce' => wp_create_nonce('wp_rest'),
+            'giveApiURL' => site_url('/wp-json/give-api/v2/'),
+            'logOutMsg' => __('Are you sure you want to logout?', 'give-kindness-manager'),
         ] );
     }
 }
