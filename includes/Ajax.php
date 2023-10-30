@@ -19,6 +19,9 @@ class Ajax {
 
         add_action( 'wp_ajax_campaign_form_template_update', array( $this, 'campaign_form_template_update') );
         add_action( 'wp_ajax_nopriv_campaign_form_template_update', array( $this, 'campaign_form_template_update') );
+
+        add_action( 'wp_ajax_update_donation_options', array( $this, 'update_donation_options') );
+        add_action( 'wp_ajax_nopriv_update_donation_options', array( $this, 'update_donation_options') );
     }
 
     /**
@@ -302,12 +305,52 @@ class Ajax {
                 }
 
             }
-            // wp_die();
+
             wp_send_json_success(['success'=> true]);
         }
     }
 
-    public function user_login() {
-        
+    /**
+     * Update donation options
+     * 
+     */
+    public function update_donation_options() {
+
+        check_ajax_referer( 'give_kindness-manager-nonce', 'security' );
+        if( $_POST ) {
+            $form_id = wp_unslash( $_POST['form_id'] );
+            $form_data = wp_unslash( $_POST['form_data'] );
+
+            $_give_price_option = $form_data['_give_price_option'];
+            $_give_recurring = $form_data['_give_recurring'];
+            $_give_period_functionality = $form_data['_give_period_functionality'];
+            $_give_period_interval = $form_data['_give_period_interval'];
+            $_give_period = $form_data['_give_period'];
+            $_give_times = $form_data['_give_times'];
+            $_give_set_price = $form_data['_give_set_price'];
+            $_give_checkbox_default = $form_data['_give_checkbox_default'];
+            $_give_custom_amount = $form_data['_give_custom_amount'];
+            $_give_custom_amount_range_give_donation_limit_minimum = $form_data['_give_custom_amount_range_give_donation_limit_minimum'];
+            $_give_custom_amount_range_give_donation_limit_maximum = $form_data['_give_custom_amount_range_give_donation_limit_maximum'];
+            $_give_custom_amount_text = $form_data['_give_custom_amount_text'];
+            $_give_currency_price = $form_data['_give_currency_price'];
+
+            give_update_meta( $form_id, '_give_price_option', $_give_price_option );
+            give_update_meta( $form_id, '_give_recurring', $_give_recurring );
+            give_update_meta( $form_id, '_give_period_functionality', $_give_period_functionality );
+            give_update_meta( $form_id, '_give_period_interval', $_give_period_interval );
+            give_update_meta( $form_id, '_give_period', $_give_period );
+            give_update_meta( $form_id, '_give_times', $_give_times );
+            give_update_meta( $form_id, '_give_set_price', $_give_set_price );
+            give_update_meta( $form_id, '_give_checkbox_default', $_give_checkbox_default );
+            give_update_meta( $form_id, '_give_custom_amount', $_give_custom_amount );
+            give_update_meta( $form_id, '_give_custom_amount_range_minimum', $_give_custom_amount_range_give_donation_limit_minimum );
+            give_update_meta( $form_id, '_give_custom_amount_range_maximum', $_give_custom_amount_range_give_donation_limit_maximum );
+            give_update_meta( $form_id, '_give_custom_amount_text', $_give_custom_amount_text );
+            give_update_meta( $form_id, '_give_currency_price', $_give_currency_price );
+        }
+
+        wp_send_json_success(['success'=> true]);
+
     }
 }

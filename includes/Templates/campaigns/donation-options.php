@@ -101,7 +101,7 @@
    <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block">
       <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Custom Amount', 'give-kindness-manager'); ?></legend>
       <div class="give-donor-dashboard-select-control__option">
-         <select name="_give_checkbox_default" id="_give_checkbox_default">
+         <select name="_give_custom_amount" id="_give_custom_amount">
             <option value="enabled"><?php echo __('Enabled', 'give-kindness-manager'); ?></option>
             <option value="disabled"><?php echo __('Disabled', 'give-kindness-manager'); ?></option>
          </select>

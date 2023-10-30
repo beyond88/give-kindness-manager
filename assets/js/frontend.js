@@ -390,6 +390,53 @@
   }); 
   
   // Update form template
+  $(document).on('click', '#give_kindness_manager-update-donation', function(){
+    let that = $(this);
+    let formId = $(this).data('campaign-id');
+    let formData = {
+      _give_price_option: $("#_give_price_option").val(),
+      _give_recurring: $("#_give_recurring").val(),
+      _give_period_functionality: $("#_give_period_functionality").val(),
+      _give_period_interval: $("#_give_period_interval").val(),
+      _give_period: $("#_give_period").val(),
+      _give_times: $("#_give_times").val(),
+      _give_checkbox_default: $("#_give_checkbox_default").val(),
+      _give_set_price: $("#_give_set_price").val(),
+      _give_custom_amount: $("#_give_custom_amount").val(),
+      _give_custom_amount_range_give_donation_limit_minimum: $("#_give_custom_amount_range_give_donation_limit_minimum").val(),
+      _give_custom_amount_range_give_donation_limit_maximum: $("#_give_custom_amount_range_give_donation_limit_maximum").val(),
+      _give_custom_amount_text: $("#_give_custom_amount_text").val(),
+      _give_currency_price: $("#_give_currency_price").val(),
+    };
+
+    // console.log('Before form submit==>',formData);
+
+    that.attr('disabled', true);
+    that.text(give_kindness_manager.processing);
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: give_kindness_manager.ajax_url,
+      data: {
+        form_id: formId,
+        form_data: formData,
+        action: 'update_donation_options',
+        security: give_kindness_manager.nonce,
+      },
+      success: function(data) {
+        that.attr('disabled', false);
+        that.text(give_kindness_manager.update);
+      },
+      fail: function (data) {
+        console.log('fail==>', data);
+        that.text(give_kindness_manager.update);
+        that.attr('disabled', false);
+      }
+    });
+
+  });
+
+  // Update donation form template
   $(document).on('click', '#give_kindness_manager-update-form-template', function(){
     let that = $(this);
     let formId = $(this).data('campaign-id');
@@ -827,7 +874,10 @@ function formLoad(form, formType){
       showHideContent('', '.gkm-legacy-form-item');
     }
     jQuery("#gkm-legacy-content_placement").val(displaySettings.content_placement);
-    tinymce.get( jQuery("#gkm-legacy-legacy_display_settings_form_content").attr( 'id' ) ).setContent(displaySettings.form_content);
+    if(displaySettings.form_content != ''){
+      tinymce.get( jQuery("#gkm-legacy-legacy_display_settings_form_content").attr( 'id' ) ).setContent(displaySettings.form_content);
+    }
+    
   }
 }
 
