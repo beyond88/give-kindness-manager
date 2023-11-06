@@ -91,6 +91,12 @@ class Ajax {
 
                 $donation_option = get_post_meta( $form_id, '_give_price_option', true);
                 $recurring_donations = get_post_meta( $form_id, '_give_recurring', true);
+                $period_functionality = get_post_meta( $form_id, '_give_period_functionality', true);
+
+                $period_interval = get_post_meta( $form_id, '_give_period_interval', true);
+                $default_donor_choice = get_post_meta( $form_id, '_give_period_default_donor_choice', true);
+                $give_times = get_post_meta( $form_id, '_give_times', true);
+                $checkbox_default = get_post_meta( $form_id, '_give_checkbox_default', true);
                 $set_donation = get_post_meta( $form_id, '_give_set_price', true); 
                 $custom_amount = get_post_meta( $form_id, '_give_custom_amount', true);
                 $custom_amount_range_minimum = get_post_meta( $form_id, '_give_custom_amount_range_minimum', true);
@@ -100,6 +106,13 @@ class Ajax {
                 
                 $form_data['donation_option'] = $donation_option;
                 $form_data['recurring_donations'] = $recurring_donations;
+                $form_data['period_functionality'] = $period_functionality;
+
+                $form_data['period_interval'] = $period_interval;
+                $form_data['default_donor_choice'] = $default_donor_choice;
+                $form_data['give_times'] = $give_times;
+                $form_data['checkbox_default'] = $checkbox_default;
+
                 $form_data['set_donation'] = $set_donation;
                 $form_data['custom_amount'] = $custom_amount;
                 $form_data['custom_amount_range_minimum'] = $custom_amount_range_minimum;

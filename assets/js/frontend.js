@@ -55,40 +55,31 @@
           security: give_kindness_manager.nonce,
         },
         success: function(res) {
+
+          console.log('res==>',res);
           if(res.hasOwnProperty('success') && res.success == true) {
 
             // Show hide form based on form type
-            if(res.hasOwnProperty('data') && res.data.hasOwnProperty('form_type')){
+            if(res.hasOwnProperty('data') && 
+              res.data.hasOwnProperty('form_type') && res.data.hasOwnProperty('tab') &&
+              res.data.tab === "give_kindness_manager-form-template" 
+              ){
               let formType = res.data.form_type;
-              $('#gkm-form-type').val(formType);
-              if(formType == 'sequoia'){ // multi-step form
-                $('.give-donor-multi-step-form').show();
-                $('.give-donor-classic-form').hide();
-                $('.give-donor-legacy-form').hide();
-                let hideLoader = true;
-                showHideLoader('.give-donor-multi-step-form', hideLoader);
-              } else if(formType == 'classic'){ // classic form
-                $('.give-donor-classic-form').show();
-                $('.give-donor-multi-step-form').hide();
-                $('.give-donor-legacy-form').hide();
-                let hideLoader = true;
-                showHideLoader('.give-donor-classic-form', hideLoader);
-              } else { // legacy form
-                $('.give-donor-legacy-form').show();
-                $('.give-donor-classic-form').hide();
-                $('.give-donor-multi-step-form').hide();
-                let hideLoader = true;
-                showHideLoader('.give-donor-legacy-form', hideLoader);
-              }
-              formLoad(res.data.form_info, formType);
+              templateLoad(res.data.form_info, formType);
             }
 
-            if(res.hasOwnProperty('data') && res.data.hasOwnProperty('tab')){
-              let currentTab = res.data.tab;
-              if(currentTab === "give_kindness_manager-donation-options"){
-                let hideLoader = true;
-                showHideLoader('#give_kindness_manager-donation-options', hideLoader);
-              }
+            if(res.hasOwnProperty('data') && 
+              res.data.hasOwnProperty('tab') &&
+              res.data.tab === "give_kindness_manager-donation-options" ){
+              donationOptionsLoad(res.data);
+            }
+
+            if(res.hasOwnProperty('data') && 
+              res.data.hasOwnProperty('tab') && 
+              res.data.tab == "give_kindness_manager-donation-options"
+            ){
+              let hideLoader = true;
+              showHideLoader('#give_kindness_manager-donation-options', hideLoader);
             }
 
           }
@@ -349,6 +340,44 @@
     } else {
       showHideContent('.gkm-classic-secure-badge-item', '');
     }
+  });
+
+  // Show/hide classic form display badge item
+  $(document).on('change', '#_give_custom_amount', function(){
+    let displayContent = $(this).val();
+    if(displayContent === 'enabled'){
+      showHideContent('', '.gkm-custom-amount-item');
+    } else {
+      showHideContent('.gkm-custom-amount-item', '');
+    }
+  });
+
+  // Show/hide classic form display badge item
+  $(document).on('change', '#_give_price_option', function(){
+    let displayContent = $(this).val();
+    if(displayContent === 'set'){
+      showHideContent('', '.gkm-set-donation-item');
+    } else {
+      showHideContent('.gkm-set-donation-item', '');
+    }
+  });
+
+  // Show/hide classic form display badge item
+  $(document).on('change', '#_give_recurring', function(){
+    let displayContent = $(this).val();
+    if(displayContent === 'yes_donor'){
+      showHideContent('', '.gkm-donation-recurring-item');
+    } else {
+      showHideContent('.gkm-donation-recurring-item', '');
+    }
+  });
+
+  // Show/hide classic form display badge item
+  $(document).on('change', '#_give_period_interval', function(){
+    let periodInterval = $(this).val();
+    let period = $("#_give_period").val();
+    let strTime = loadTimes(periodInterval, period);
+    console.log('load times==>',strTime)
   });
 
   // Update campaign settings
@@ -723,10 +752,32 @@ function showHideLoader(area, showHideLoader = true){
 
 /**************************
 *  
-* Multi-form load
+* Template load
 * 
 ***************************/
-function formLoad(form, formType){
+function templateLoad(form, formType){
+
+  jQuery('#gkm-form-type').val(formType);
+  if(formType == 'sequoia'){ // multi-step form
+    jQuery('.give-donor-multi-step-form').show();
+    jQuery('.give-donor-classic-form').hide();
+    jQuery('.give-donor-legacy-form').hide();
+    let hideLoader = true;
+    showHideLoader('.give-donor-multi-step-form', hideLoader);
+  } else if(formType == 'classic'){ // classic form
+    jQuery('.give-donor-classic-form').show();
+    jQuery('.give-donor-multi-step-form').hide();
+    jQuery('.give-donor-legacy-form').hide();
+    let hideLoader = true;
+    showHideLoader('.give-donor-classic-form', hideLoader);
+  } else { // legacy form
+    jQuery('.give-donor-legacy-form').show();
+    jQuery('.give-donor-classic-form').hide();
+    jQuery('.give-donor-multi-step-form').hide();
+    let hideLoader = true;
+    showHideLoader('.give-donor-legacy-form', hideLoader);
+  }
+
   if(formType === 'sequoia'){
 
     /**********************
@@ -881,6 +932,145 @@ function formLoad(form, formType){
   }
 }
 
+/**************************
+*  
+* Template load
+* 
+***************************/
+function donationOptionsLoad(form){
+
+  jQuery("#_give_price_option").val(form.donation_option);
+  if( form.donation_option == "set" ){
+    showHideContent('', '.gkm-set-donation-item');
+  }
+  jQuery("#_give_recurring").val(form.recurring_donations);
+  if(form.recurring_donations === 'yes_donor'){
+    showHideContent('', '.gkm-donation-recurring-item');
+  } else {
+    showHideContent('.gkm-donation-recurring-item', '');
+  }
+  jQuery("#_give_period_functionality").val(form.period_functionality);
+  jQuery("#_give_period_interval").val(form.period_interval);
+  jQuery("#_give_period").val(form.default_donor_choice);
+  jQuery("#_give_times").val(form.give_times);
+  jQuery("#_give_checkbox_default").val(form.checkbox_default);
+  jQuery("#_give_set_price").val(form.set_donation);
+  jQuery("#_give_custom_amount").val(form.custom_amount);
+  jQuery("#_give_custom_amount_range_give_donation_limit_minimum").val(form.custom_amount_range_minimum);
+  jQuery("#_give_custom_amount_range_give_donation_limit_maximum").val(form.custom_amount_range_maximum);
+  jQuery("#_give_custom_amount_text").val(form.custom_amount_text);
+  jQuery("#_give_currency_price").val(form.currency_price);
+
+}
+
 function removeDiv(parentDiv, targetDiv){
   jQuery(parentDiv).find(targetDiv).remove();
+}
+
+/**************************
+*  
+* Load times
+* 
+***************************/
+function loadTimes(pInterval, period) {
+
+  let intervalPeriod = pInterval;
+  let periodTimes = period;
+  if(periodTimes === "once"){
+
+  }
+
+  if(periodTimes === "day"){
+    return loadDays(intervalPeriod);
+  }
+
+  if(periodTimes === "week"){
+
+  }
+
+  if(periodTimes === "month"){
+
+  }
+
+  if(periodTimes === "quater"){
+
+  }
+
+  if(periodTimes === "year"){
+
+  }
+
+}
+
+function loadDays(periodInterval){
+
+  let every = 1;
+  let every2nd = 2;
+  let every3rd = 3;
+  let every4th = 4;
+  let every5th = 5;
+  let every6th = 6;
+
+  if( parseInt(periodInterval) === every ){
+    dayInc = 2;
+  }
+
+  if( parseInt(periodInterval) === every2nd || parseInt(periodInterval) === every4th ){
+    dayInc = 4;
+  }
+
+  if( parseInt(periodInterval) === every3rd ){
+    dayInc = 3;
+  }
+
+  if( parseInt(periodInterval) === every5th ){
+    dayInc = 5;
+  }
+
+  if( parseInt(periodInterval) === every6th ){
+    dayInc = 6;
+  }
+
+  let str = '';
+  str +=`<option value="0">Ongoing</option>`;
+  for( i = dayInc; i <= 90; i++ ){
+    if(i === 0){
+      continue;
+    }
+
+    if( parseInt(periodInterval) === every2nd ){
+      if (i % 2 !== 0){
+        continue;
+      }
+    }
+
+    if( parseInt(periodInterval) === every3rd ){
+      i += parseInt(every3rd);
+    }
+
+    if( parseInt(periodInterval) === every4th ){
+      i += parseInt(every4th);
+    }
+
+    if( parseInt(periodInterval) === every5th ){
+      i += parseInt(every5th);
+    }
+
+    if( parseInt(periodInterval) === every6th ){
+      i += parseInt(every6th);
+    }
+
+    str +=`<option value="${i}">${i} days</option>`;
+
+    if( parseInt(periodInterval) === every3rd  || 
+      parseInt(periodInterval) === every4th || 
+      parseInt(periodInterval) === every5th || 
+      parseInt(periodInterval) === every6th
+    ){
+      i = i-1;
+    }
+
+  }
+  return str; 
+
 }

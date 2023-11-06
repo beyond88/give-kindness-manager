@@ -24,7 +24,7 @@
       </div>
    </fieldset>
 
-   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block">
+   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block gkm-donation-recurring-item">
       <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Recurring Period', 'give-kindness-manager'); ?></legend>
       <div class="give-donor-dashboard-select-control__option">
          <select name="_give_period_functionality" id="_give_period_functionality">
@@ -34,7 +34,7 @@
       </div>
    </fieldset>
 
-   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block">
+   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block gkm-donation-recurring-item">
       <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Recurring Options', 'give-kindness-manager'); ?></legend>
       <div class="give-donor-dashboard-select-control__option">
          <select name="_give_period_interval" id="_give_period_interval">
@@ -81,7 +81,7 @@
       </div>
    </fieldset>
 
-   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block">
+   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block gkm-donation-recurring-item">
       <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Recurring Opt-in Checkbox Default', 'give-kindness-manager'); ?></legend>
       <div class="give-donor-dashboard-select-control__option">
          <select name="_give_checkbox_default" id="_give_checkbox_default">
@@ -91,7 +91,7 @@
       </div>
    </fieldset>
 
-   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block">
+   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block gkm-set-donation-item">
       <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Set Donation', 'give-kindness-manager'); ?></legend>
       <div class="give-donor-dashboard-select-control__option">
          <input type="number" name="_give_set_price" id="_give_set_price" value="">
@@ -117,7 +117,7 @@
       </div>
    </fieldset>
 
-   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block">
+   <fieldset class="give-donor-dashboard-select-control give_kindness_manager-inline-block gkm-custom-amount-item">
       <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Custom Amount Text', 'give-kindness-manager'); ?></legend>
       <div class="give-donor-dashboard-select-control__option">
          <input type="text" name="_give_custom_amount_text" id="_give_custom_amount_text" value="">
@@ -134,14 +134,14 @@
       </div>
    </fieldset>
 
-   <fieldset class="give-donor-dashboard-select-control">
+   <!-- <fieldset class="give-donor-dashboard-select-control">
       <legend class="give-donor-dashboard-radio-control__legend"><?php echo __('Set Amount', 'give-kindness-manager'); ?></legend>
       <div class="give-donor-dashboard-select-control__option">
          <input type="number" name="_give_cs_custom_prices[PHP]" id="" value="" placeholder="">
          <br>
          <input type="number" name="_give_cs_custom_prices[IDR]" id="" value="" placeholder="">
       </div>
-   </fieldset>
+   </fieldset> -->
 
    <button class="give-donor-dashboard-button give-donor-dashboard-button--primary give_kindness_manager-update-campaign" id="give_kindness_manager-update-donation" data-campaign-id="">
       <?php echo __('Update', 'give-kindness'); ?>
