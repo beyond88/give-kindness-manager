@@ -372,13 +372,24 @@
     }
   });
 
-  // Show/hide classic form display badge item
+  // Change recurring options
   $(document).on('change', '#_give_period_interval', function(){
     let periodInterval = $(this).val();
     let period = $("#_give_period").val();
     let strTime = loadTimes(periodInterval, period);
+    $('#_give_times').html(strTime);
     console.log('load times==>',strTime)
   });
+
+  // Change recurring options
+  $(document).on('change', '#_give_period', function(){
+    let period = $(this).val();
+    let periodInterval = $("#_give_period_interval").val();
+    let strTime = loadTimes(periodInterval, period);
+    $('#_give_times').html(strTime);
+    console.log('load times==>',strTime)
+  });
+
 
   // Update campaign settings
   $(document).on('click', '#give_kindness_manager-update-campaign', function(){
@@ -985,19 +996,19 @@ function loadTimes(pInterval, period) {
   }
 
   if(periodTimes === "week"){
-
+    return loadWeeks(intervalPeriod);
   }
 
   if(periodTimes === "month"){
-
+    return loadMonths(intervalPeriod);
   }
 
-  if(periodTimes === "quater"){
-
+  if(periodTimes === "quarter"){
+    return loadQuater(intervalPeriod);
   }
 
   if(periodTimes === "year"){
-
+    return loadYear(intervalPeriod);
   }
 
 }
@@ -1073,4 +1084,307 @@ function loadDays(periodInterval){
   }
   return str; 
 
+}
+
+function loadWeeks(periodInterval) {
+  let every = 1;
+  let every2nd = 2;
+  let every3rd = 3;
+  let every4th = 4;
+  let every5th = 5;
+  let every6th = 6;
+  let weekLimits = 52;
+
+  if( parseInt(periodInterval) === every ){
+    weekInc = 2;
+  }
+
+  if( parseInt(periodInterval) === every2nd ){
+    weekInc = 4;
+  }
+
+  if( parseInt(periodInterval) === every3rd ){
+    weekInc = 3;
+  }
+
+  if( parseInt(periodInterval) === every4th ){
+    weekInc = 4;
+  }
+
+  if( parseInt(periodInterval) === every5th ){
+    weekInc = 5;
+  }
+
+  if( parseInt(periodInterval) === every6th ){
+    weekInc = 6;
+  }
+
+  let str = '';
+  str +=`<option value="0">Ongoing</option>`;
+
+  for( i = weekInc; i <= weekLimits; i++ ){
+
+    if(i === 0){
+      continue;
+    }
+
+    if( parseInt(periodInterval) === every2nd ){
+      if (i % 2 !== 0){
+        continue;
+      }
+    }
+
+    if( parseInt(periodInterval) === every3rd ){
+      i += parseInt(every3rd);
+    }
+
+    if( parseInt(periodInterval) === every4th ){
+      i += parseInt(every4th);
+    }
+
+    if( parseInt(periodInterval) === every5th ){
+      i += parseInt(every5th);
+    }
+
+    if( parseInt(periodInterval) === every6th ){
+      i += parseInt(every6th);
+    }
+
+    str +=`<option value="${i}">${i} weeks</option>`;
+
+    if( parseInt(periodInterval) === every3rd  || 
+      parseInt(periodInterval) === every4th || 
+      parseInt(periodInterval) === every5th || 
+      parseInt(periodInterval) === every6th
+    ){
+      i = i-1;
+    }
+  }
+
+  return str;
+
+}
+
+function loadMonths(periodInterval) {
+  let every = 1;
+  let every2nd = 2;
+  let every3rd = 3;
+  let every4th = 4;
+  let every5th = 5;
+  let every6th = 6;
+  let monthLimits = 24;
+
+  if( parseInt(periodInterval) === every ){
+    weekInc = 2;
+  }
+
+  if( parseInt(periodInterval) === every2nd ){
+    weekInc = 4;
+  }
+
+  if( parseInt(periodInterval) === every3rd ){
+    weekInc = 3;
+  }
+
+  if( parseInt(periodInterval) === every4th ){
+    weekInc = 4;
+  }
+
+  if( parseInt(periodInterval) === every5th ){
+    weekInc = 5;
+  }
+
+  if( parseInt(periodInterval) === every6th ){
+    weekInc = 6;
+  }
+
+  let str = '';
+  str +=`<option value="0">Ongoing</option>`;
+
+  for( i = weekInc; i <= monthLimits; i++ ){
+
+    if(i === 0){
+      continue;
+    }
+
+    if( parseInt(periodInterval) === every2nd ){
+      if (i % 2 !== 0){
+        continue;
+      }
+    }
+
+    if( parseInt(periodInterval) === every3rd ){
+      i += parseInt(every3rd);
+    }
+
+    if( parseInt(periodInterval) === every4th ){
+      i += parseInt(every4th);
+    }
+
+    if( parseInt(periodInterval) === every5th ){
+      i += parseInt(every5th);
+    }
+
+    if( parseInt(periodInterval) === every6th ){
+      i += parseInt(every6th);
+    }
+
+    str +=`<option value="${i}">${i} months</option>`;
+
+    if( parseInt(periodInterval) === every3rd  || 
+      parseInt(periodInterval) === every4th || 
+      parseInt(periodInterval) === every5th || 
+      parseInt(periodInterval) === every6th
+    ){
+      i = i-1;
+    }
+  }
+
+  return str;
+}
+
+function loadQuater(periodInterval) {
+  let every = 1;
+  let every2nd = 2;
+  let every3rd = 3;
+  let every4th = 4;
+  let every5th = 5;
+  let every6th = 6;
+  let quaterLimits = 12;
+
+  if( parseInt(periodInterval) === every ){
+    quaterInc = 2;
+  }
+
+  if( parseInt(periodInterval) === every2nd ){
+    quaterInc = 4;
+  }
+
+  if( parseInt(periodInterval) === every3rd ){
+    quaterInc = 3;
+  }
+
+  if( parseInt(periodInterval) === every4th ){
+    quaterInc = 4;
+  }
+
+  if( parseInt(periodInterval) === every5th ){
+    quaterInc = 5;
+  }
+
+  if( parseInt(periodInterval) === every6th ){
+    quaterInc = 6;
+  }
+
+  let str = '';
+  str +=`<option value="0">Ongoing</option>`;
+
+  for( i = quaterInc; i <= quaterLimits; i++ ){
+
+    if(i === 0){
+      continue;
+    }
+
+    if( parseInt(periodInterval) === every2nd ){
+      if (i % 2 !== 0){
+        continue;
+      }
+    }
+
+    if( parseInt(periodInterval) === every3rd ){
+      i += parseInt(every3rd);
+    }
+
+    if( parseInt(periodInterval) === every4th ){
+      i += parseInt(every4th);
+    }
+
+    if( parseInt(periodInterval) === every5th ){
+      i += parseInt(every5th);
+    }
+
+    if( parseInt(periodInterval) === every6th ){
+      i += parseInt(every6th);
+    }
+
+    str +=`<option value="${i}">${i} quaters</option>`;
+
+    if( parseInt(periodInterval) === every3rd  || 
+      parseInt(periodInterval) === every4th || 
+      parseInt(periodInterval) === every5th || 
+      parseInt(periodInterval) === every6th
+    ){
+      i = i-1;
+    }
+  }
+
+  return str;
+}
+
+function loadYear(periodInterval) {
+  let every = 1;
+  let every2nd = 2;
+  let every3rd = 3;
+  let every4th = 4;
+  let every5th = 5;
+  let yearLimits = 5;
+
+  if( parseInt(periodInterval) === every ){
+    quaterInc = 2;
+  }
+
+  if( parseInt(periodInterval) === every2nd ){
+    quaterInc = 4;
+  }
+
+  if( parseInt(periodInterval) === every3rd ){
+    quaterInc = 3;
+  }
+
+  if( parseInt(periodInterval) === every4th ){
+    quaterInc = 4;
+  }
+
+  if( parseInt(periodInterval) >= every5th ){
+    quaterInc = 5;
+  }
+
+  let str = '';
+  str +=`<option value="0">Ongoing</option>`;
+
+  for( i = quaterInc; i <= yearLimits; i++ ){
+
+    if(i === 0){
+      continue;
+    }
+
+    if( parseInt(periodInterval) === every2nd ){
+      if (i % 2 !== 0){
+        continue;
+      }
+    }
+
+    if( parseInt(periodInterval) === every3rd ){
+      i += parseInt(every3rd);
+    }
+
+    if( parseInt(periodInterval) === every4th ){
+      i += parseInt(every4th);
+    }
+
+    if( parseInt(periodInterval) === every5th ){
+      i += parseInt(every5th);
+    }
+
+    str +=`<option value="${i}">${i} years</option>`;
+
+    if( parseInt(periodInterval) === every3rd  || 
+      parseInt(periodInterval) === every4th || 
+      parseInt(periodInterval) === every5th
+    ){
+      i = i-1;
+    }
+  }
+
+  return str;
 }

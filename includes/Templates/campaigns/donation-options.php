@@ -48,7 +48,7 @@
          <select id="_give_period" name="_give_period" class="give-field give-period-field give-select">
 	         <option value="day">day</option>
             <option value="week">week</option>
-            <option value="month" selected="selected">month</option>
+            <option value="month">month</option>
             <option value="quarter">quarter</option>
             <option value="year">year</option>
          </select>
