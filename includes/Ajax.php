@@ -159,7 +159,9 @@ class Ajax {
      * 
      */
     public function campaign_form_template_update() {
+		//@ini_set( 'display_errors', 1 );
         check_ajax_referer( 'give_kindness-manager-nonce', 'security' );
+
         if( $_POST ) {
             $form_id = wp_unslash( $_POST['form_id'] );
             $form_type = wp_unslash( $_POST['form_type'] );
@@ -198,6 +200,9 @@ class Ajax {
                     $ty_twitter_message = $form_data['ty_twitter_message'];
 
                     $settings = give_get_meta( $form_id, '_give_sequoia_form_template_settings', true);
+					if( !isset( $settings) || empty( $settings ) ){
+						$settings = [];
+					}
 
                     // $settings['visual_appearance']['primary_color'] = '';
                     $settings['visual_appearance']['google-fonts'] = $google_fonts;
@@ -254,6 +259,10 @@ class Ajax {
                     $ty_twitter_message = $form_data['ty_twitter_message'];
                     
                     $settings = give_get_meta( $form_id, '_give_classic_form_template_settings', true);
+					
+					if( !isset( $settings) || empty( $settings ) ){
+						$settings = [];
+					}
 
                     $settings['visual_appearance']['container_style'] = $container_style;
                     $settings['visual_appearance']['primary_font'] = $primary_font;
@@ -295,6 +304,9 @@ class Ajax {
                     $reveal_label = $form_data['reveal_label'];
 
                     $settings = give_get_meta( $form_id, '_give_legacy_form_template_settings', true);
+					if( !isset( $settings) || empty( $settings ) ){
+						$settings = [];
+					}
 
                     $settings['display_settings']['display_style'] = $display_style;
                     $settings['display_settings']['payment_display'] = $payment_display;
