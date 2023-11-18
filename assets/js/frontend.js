@@ -789,6 +789,10 @@ function templateLoad(form, formType){
     showHideLoader('.give-donor-legacy-form', hideLoader);
   }
 
+  if( form === '' ){
+    return;
+  }
+
   if(formType === 'sequoia'){
 
     /**********************
