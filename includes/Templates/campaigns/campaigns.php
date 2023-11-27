@@ -37,7 +37,7 @@
                     <?php echo $goal; ?>
                 </div>
                 <div class="give-donor-dashboard-table__column">
-                    <?php echo $donations; ?>
+                    <a href="javascript:void(0);" class="view-all-donation" data-form-id="<?php echo $campaign->ID; ?>"><?php echo $donations; ?></a>
                 </div>
                 <div class="give-donor-dashboard-table__column">
                     <?php echo $revenue; ?>

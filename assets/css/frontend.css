@@ -312,3 +312,7 @@ input[type="week"] {
 .gkm-donation-recurring-item {
   display: none;
 }
+
+.view-all-donation{
+  cursor: pointer;
+}
