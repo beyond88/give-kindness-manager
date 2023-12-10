@@ -7,7 +7,11 @@
             <?php echo sprintf(__('%s Total Campaigns', 'give-kindness-manager'), $acampaigns->post_count); ?>
         </span>
     </div>
-    <div class="give-donor-dashboard-table">
+
+    <!-- Loader -->
+    <div class="give-kindness-manager-ring"><div></div><div></div><div></div><div></div></div>
+
+    <div class="give-donor-dashboard-table give-kindness-campaigns-container" id="give-kindness-campaign-list" style="opacity: 0.5">
         <div class="give-donor-dashboard-table__header">
             <div class="give-donor-dashboard-table__column"><?php echo __('Campaign','give-kindness-manager');?></div>
             <div class="give-donor-dashboard-table__column"><?php echo __('Goal','give-kindness-manager');?></div>
@@ -17,10 +21,7 @@
             <div class="give-donor-dashboard-table__column"><?php echo __('Status','give-kindness-manager');?></div>
         </div>
 
-        <!-- Loader -->
-        <div class="give-kindness-manager-ring"><div></div><div></div><div></div><div></div></div>
-
-        <div class="give-donor-dashboard-table__rows give-kindness-campaigns-container give-kindness-items-container" style="opacity: 0.5">
+        <div class="give-donor-dashboard-table__rows give-kindness-items-container">
             <?php if( $acampaigns->have_posts() ) : ?>
             <?php foreach( $acampaigns->posts as $campaign ) : ?>
             <?php 
@@ -37,7 +38,7 @@
                     <?php echo $goal; ?>
                 </div>
                 <div class="give-donor-dashboard-table__column">
-                    <a href="javascript:void(0);" class="view-all-donation" data-form-id="<?php echo $campaign->ID; ?>"><?php echo $donations; ?></a>
+                    <a href="javascript:void(0);" class="view-all-donations" data-form-id="<?php echo $campaign->ID; ?>"><?php echo $donations; ?></a>
                 </div>
                 <div class="give-donor-dashboard-table__column">
                     <?php echo $revenue; ?>
@@ -112,11 +113,46 @@
             </div>
         </div>
     </div>
+
+    <div class="give-donor-dashboard-heading give-donor-dashboard-donations-heading give-kindness-donations-area-item">
+        <div class="donations-campaign-name give-dashboard-donations-heading-item">
+            <?php echo __('Campaign Name:', 'give-kindness-manager'); ?><span class="display-campaign-name"></span>
+        </div>
+        <div class="donations-list-close give-dashboard-donations-heading-item">
+            &#x2715
+        </div>
+    </div>
+    <div class="give-donor-dashboard-table give-kindness-donations-list give-kindness-donations-area-item" id="give-kindness-donations-list">
+        <div class="give-donor-dashboard-table__header">
+            <div class="give-donor-dashboard-table__column"><?php echo __('ID','give-kindness-manager');?></div>
+            <div class="give-donor-dashboard-table__column"><?php echo __('Amount','give-kindness-manager');?></div>
+            <div class="give-donor-dashboard-table__column"><?php echo __('Payment Type','give-kindness-manager');?></div>
+            <div class="give-donor-dashboard-table__column"><?php echo __('Donor Name','give-kindness-manager');?></div>
+            <div class="give-donor-dashboard-table__column"><?php echo __('Fee','give-kindness-manager');?></div>
+            <div class="give-donor-dashboard-table__column"><?php echo __('Status','give-kindness-manager');?></div>
+        </div>
+        <div class="give-donor-dashboard-table__rows give-kindness-donations-list" style="opacity: 0.5">
+            <div class="give-donor-dashboard-table__row give-kindness-donations-item item-visible">
+                <div class="give-donor-dashboard-table__column">
+                </div>
+                <div class="give-donor-dashboard-table__column">
+                </div>
+                <div class="give-donor-dashboard-table__column">
+                </div>
+                <div class="give-donor-dashboard-table__column">
+                </div>
+                <div class="give-donor-dashboard-table__column">
+                </div>
+                <div class="give-donor-dashboard-table__column">
+                </div>
+            </div>       
+        </div>
+    </div>    
 </div>
 
 <script>
     jQuery(window).load(function() {
         jQuery("#give_kindness_manager-campaigns").find('.give-kindness-manager-ring').hide();
-        jQuery('.give-kindness-items-container').css("opacity","1");
+        jQuery('.give-kindness-campaigns-container').css("opacity","1");
     });
 </script>

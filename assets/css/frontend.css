@@ -313,6 +313,35 @@ input[type="week"] {
   display: none;
 }
 
-.view-all-donation{
+.view-all-donations {
+  cursor: pointer;
+}
+
+.give-kindness-donations-area-item {
+  display: none !important;
+}
+
+.give-donor-dashboard-donations-heading {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.give-dashboard-donations-heading-item {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.donations-campaign-name {
+  text-align: left;
+}
+
+.donations-list-close {
+  text-align: right;
+  font-size: 20px;
+  font-weight: 900;
+  color: red;
   cursor: pointer;
 }

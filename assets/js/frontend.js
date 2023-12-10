@@ -56,7 +56,6 @@
         },
         success: function(res) {
 
-          console.log('res==>',res);
           if(res.hasOwnProperty('success') && res.success == true) {
 
             // Show hide form based on form type
@@ -653,6 +652,19 @@
       });
     }
   });
+
+  /**************************
+  *  
+  * Display donations by form id
+  * 
+  ***************************/
+  $(document).on('click', '.view-all-donations', function(){
+    let form_id = $(this).data('form-id');
+    console.log("current form id===>",form_id);
+    if(form_id != ''){
+      $('.give-kindness-donations-area-item').show();
+    }
+  })
 
   
 })(jQuery, window, document);
