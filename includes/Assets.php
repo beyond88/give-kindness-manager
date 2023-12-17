@@ -95,6 +95,7 @@ class Assets {
             'save' => __('Save', 'give-kindness-manager'),
             'apiNonce' => wp_create_nonce('wp_rest'),
             'giveApiURL' => site_url('/wp-json/give-api/v2/'),
+            'giveKindnessApiURL' => site_url('/wp-json/give-kindness/v1/'),
             'logOutMsg' => __('Are you sure you want to logout?', 'give-kindness-manager'),
         ] );
     }

@@ -10,6 +10,7 @@ class API {
      * Initialize the class
      */
     function __construct() {
+        //new API\GiveKindnessManagerAPI();
     }
 
     /**

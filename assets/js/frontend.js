@@ -663,14 +663,35 @@
     let form_id = $(this).data('form-id');
     // console.log("current form id===>",form_id);
     if(form_id != ''){
-      jQuery("#give_kindness_manager-campaigns").find('.give-kindness-manager-ring').show();
+      $('#display-campaign-name').text($(this).data('campaign-name'));
+      $("#give_kindness_manager-campaigns").find('.give-kindness-manager-ring').show();
       $('.give-kindness-campaign-list-item').hide();
       $('.give-kindness-donations-area-item').attr('style', 'display: block !important');
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        headers: {'X-WP-Nonce': give_kindness_manager.apiNonce },
+        url: give_kindness_manager.giveKindnessApiURL+'donations',
+        data: {
+          form: form_id
+        },
+        success: function(data) {
+          $("#give-kindness-donations-list-area").css({'opacity': '1'});
+          $("#give-kindness-donations-list-area").html(data);
+          $("#give_kindness_manager-campaigns").find('.give-kindness-manager-ring').hide();
+          console.log('donations==>',data);
+        },
+        error: function (error) {
+          console.log('fail==>', error);
+          $("#give-kindness-donations-list-area").css({'opacity': '1'});
+        }
+      });
     }
   });
 
   $(document).on('click', '.donations-list-close', function(){
-    jQuery("#give_kindness_manager-campaigns").find('.give-kindness-manager-ring').hide();
+    $("#give-kindness-donations-list-area").css({'opacity': '0.5'});
+    $("#give_kindness_manager-campaigns").find('.give-kindness-manager-ring').hide();
     $('.give-kindness-campaign-list-item').show();
     $('.give-kindness-donations-area-item').attr('style', 'display: none !important');
   });
