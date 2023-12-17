@@ -2,7 +2,7 @@
     $acampaigns = $object->give_kindness_manager_campaigns();
 ?>
 <div class="give-donor-dashboard-tab-content" id="give_kindness_manager-campaigns" data-tab-content="give_kindness_manager-campaigns">
-    <div class="give-donor-dashboard-heading give-donor-dashboard-campaign-heading">
+    <div class="give-donor-dashboard-heading give-donor-dashboard-campaign-heading give-kindness-campaign-list-item">
         <span>
             <?php echo sprintf(__('%s Total Campaigns', 'give-kindness-manager'), $acampaigns->post_count); ?>
         </span>
@@ -11,7 +11,7 @@
     <!-- Loader -->
     <div class="give-kindness-manager-ring"><div></div><div></div><div></div><div></div></div>
 
-    <div class="give-donor-dashboard-table give-kindness-campaigns-container" id="give-kindness-campaign-list" style="opacity: 0.5">
+    <div class="give-donor-dashboard-table give-kindness-campaigns-container give-kindness-campaign-list-item" style="opacity: 0.5">
         <div class="give-donor-dashboard-table__header">
             <div class="give-donor-dashboard-table__column"><?php echo __('Campaign','give-kindness-manager');?></div>
             <div class="give-donor-dashboard-table__column"><?php echo __('Goal','give-kindness-manager');?></div>

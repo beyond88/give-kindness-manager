@@ -659,12 +659,23 @@
   * 
   ***************************/
   $(document).on('click', '.view-all-donations', function(){
+
     let form_id = $(this).data('form-id');
-    console.log("current form id===>",form_id);
+    // console.log("current form id===>",form_id);
     if(form_id != ''){
-      $('.give-kindness-donations-area-item').show();
+      jQuery("#give_kindness_manager-campaigns").find('.give-kindness-manager-ring').show();
+      $('.give-kindness-campaign-list-item').hide();
+      $('.give-kindness-donations-area-item').attr('style', 'display: block !important');
     }
-  })
+  });
+
+  $(document).on('click', '.donations-list-close', function(){
+    jQuery("#give_kindness_manager-campaigns").find('.give-kindness-manager-ring').hide();
+    $('.give-kindness-campaign-list-item').show();
+    $('.give-kindness-donations-area-item').attr('style', 'display: none !important');
+  });
+
+
 
   
 })(jQuery, window, document);
