@@ -8,6 +8,10 @@
             <i class="fas fa-donate"></i>
             <?php echo __('Campaigns', 'give-kindness-manager'); ?>
         </a>
+        <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-donors">
+            <i class="fas fa-donate"></i>
+            <?php echo __('Donors', 'give-kindness-manager'); ?>
+        </a>
         <a class="give-donor-dashboard-tab-link" href="javascript:void(0)" data-tab-id="give_kindness_manager-settings">
             <i class="fas fa-gear"></i>
             <?php echo __('Settings', 'give-kindness-manager'); ?>
